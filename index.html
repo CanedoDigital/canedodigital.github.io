@@ -1,0 +1,2997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIUS - Streaming Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #0a1929;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* LOGIN PAGE */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a1929 0%, #1e3a5f 100%);
+        }
+
+        .login-logo {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #00d4ff;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+            letter-spacing: 2px;
+        }
+
+        .login-box {
+            background: rgba(26, 47, 69, 0.95);
+            padding: 3.5rem 3rem;
+            border-radius: 8px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .login-box h2 {
+            margin-bottom: 2rem;
+            color: #fff;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #b3b3b3;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            background: #333;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: 2px solid #00d4ff;
+            background: #454545;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .login-btn:hover {
+            background: #00b8e6;
+        }
+
+        .error-message {
+            background: rgba(229, 9, 20, 0.8);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #fff;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        /* MAIN APP */
+        .app-container {
+            display: none;
+        }
+
+        /* HEADER - Exactly like Netflix */
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 1) 0%, rgba(10, 25, 41, 0.9) 50%, transparent 100%);
+            padding: 20px 4%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        header.scrolled {
+            background: rgba(10, 25, 41, 0.95);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: #e5e5e5;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #b3b3b3;
+        }
+
+        nav a.active {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .user-name {
+            color: #00d4ff;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid #e5e5e5;
+            color: #e5e5e5;
+            padding: 0.4rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .logout-btn:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        /* SEARCH BAR IN HEADER */
+        .search-box {
+            position: relative;
+            width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.5rem 2.5rem 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #333;
+            border-radius: 3px;
+            color: white;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            background: rgba(0, 0, 0, 0.9);
+            width: 300px;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 1rem;
+            pointer-events: none;
+        }
+
+        /* HERO BANNER */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            min-height: 500px;
+            background-image: url('https://image.tmdb.org/t/p/original/9QW8bQ0BK4GjtpHPuZvH6cfcBDS.jpg');
+            background-size: cover;
+            background-position: center;
+            margin-top: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 4%;
+            max-width: 600px;
+        }
+
+        .hero-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 14.7vw;
+            background: linear-gradient(to top, #0a1929 0%, transparent 100%);
+        }
+
+        .hero-title {
+            font-size: 4vw;
+            font-weight: 900;
+            margin-bottom: 1vw;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5vw;
+            margin-bottom: 1.5vw;
+            font-size: 1.2vw;
+        }
+
+        .hero-match {
+            color: #46d369;
+            font-weight: 700;
+        }
+
+        .hero-year {
+            color: #e5e5e5;
+        }
+
+        .hero-rating {
+            color: #ffd700;
+        }
+
+        .hero-description {
+            font-size: 1.4vw;
+            line-height: 1.6;
+            margin-bottom: 2vw;
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1vw;
+        }
+
+        .hero-play-btn,
+        .hero-info-btn {
+            padding: 0.8vw 2.5vw;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2vw;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8vw;
+            transition: all 0.2s;
+        }
+
+        .hero-play-btn {
+            background: #fff;
+            color: #000;
+        }
+
+        .hero-play-btn:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-info-btn {
+            background: rgba(109, 109, 110, 0.7);
+            color: #fff;
+        }
+
+        .hero-info-btn:hover {
+            background: rgba(109, 109, 110, 0.4);
+        }
+
+        .play-icon,
+        .info-icon {
+            font-size: 1.5vw;
+        }
+
+        /* CONTINUE WATCHING SECTION */
+        .continue-watching-section {
+            padding: 0 4% 4vw;
+            margin-bottom: 2vw;
+            display: none;
+        }
+
+        .continue-watching-section.active {
+            display: block;
+        }
+
+        /* CONTENT SECTIONS */
+        .content-section {
+            padding: 0 4% 4vw;
+            margin-bottom: 2vw;
+        }
+
+        .section-title {
+            font-size: 1.4vw;
+            font-weight: 700;
+            margin-bottom: 1.2vw;
+            color: #e5e5e5;
+        }
+
+        /* Netflix-style Horizontal Scrolling */
+        .content-row {
+            position: relative;
+            overflow: visible;
+        }
+
+        .content-slider {
+            display: flex;
+            gap: 0.5vw;
+            overflow-x: auto;
+            padding: 0.5vw 0 2vw 0;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        .content-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Netflix-style Vertical Poster Cards */
+        .content-card {
+            position: relative;
+            min-width: 13vw;
+            width: 13vw;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #181818;
+        }
+
+        .content-card:hover {
+            transform: scale(1.08);
+            z-index: 10;
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.4);
+        }
+
+        .content-card img {
+            width: 100%;
+            height: 19.5vw;
+            object-fit: cover;
+            display: block;
+        }
+
+        .content-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, transparent 100%);
+            padding: 1.5vw 1vw 1vw 1vw;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .content-card:hover .content-overlay {
+            opacity: 1;
+        }
+
+        .content-title {
+            font-size: 1vw;
+            font-weight: 600;
+            margin-bottom: 0.3vw;
+            color: #fff;
+        }
+
+        .content-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5vw;
+            font-size: 0.8vw;
+            color: #b3b3b3;
+        }
+
+        .rating {
+            color: #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 0.2vw;
+        }
+
+        /* PROGRESS BAR ON CARDS */
+        .progress-bar-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #00d4ff;
+            transition: width 0.3s;
+        }
+
+        /* MODAL PLAYER */
+        .player-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-modal.active {
+            display: flex;
+        }
+
+        .player-modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .player-modal-content {
+            position: relative;
+            background: #181818;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            z-index: 10000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .close-player-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .close-player-btn:hover {
+            background: rgba(0, 0, 0, 1);
+            transform: scale(1.1);
+        }
+
+        .modal-video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+        }
+
+        .modal-video-player iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-video-info {
+            padding: 2rem 2.5rem 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .modal-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            color: #b3b3b3;
+            font-size: 0.95rem;
+        }
+
+        .modal-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .modal-description {
+            color: #e5e5e5;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .modal-episodes {
+            padding: 0 2.5rem 2.5rem;
+        }
+
+        .modal-episodes-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        /* EPISODES SECTION */
+        .episodes-section {
+            padding: 0 4% 3vw;
+        }
+
+        .modal-episodes .episodes-section {
+            padding: 0;
+        }
+
+        .episodes-header {
+            margin-bottom: 2vw;
+        }
+
+        .episodes-title {
+            font-size: 1.8vw;
+            font-weight: 700;
+            margin-bottom: 1.5vw;
+            color: #fff;
+        }
+
+        .modal-episodes .episodes-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .season-selector {
+            display: inline-flex;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #404040;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .season-btn {
+            background: transparent;
+            border: none;
+            color: #b3b3b3;
+            padding: 0.6vw 1.5vw;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1vw;
+            font-weight: 500;
+            border-right: 1px solid #404040;
+        }
+
+        .modal-episodes .season-btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .season-btn:last-child {
+            border-right: none;
+        }
+
+        .season-btn.active {
+            background: #00d4ff;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .season-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1vw;
+        }
+
+        .modal-episodes .episodes-grid {
+            gap: 0.8rem;
+        }
+
+        .episode-card {
+            background: #2f2f2f;
+            border-radius: 6px;
+            padding: 1vw;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            gap: 1.5vw;
+            border: 2px solid transparent;
+        }
+
+        .modal-episodes .episode-card {
+            padding: 0.8rem;
+            gap: 1rem;
+        }
+
+        .episode-card:hover {
+            background: #3f3f3f;
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+
+        .episode-thumbnail {
+            width: 14vw;
+            height: 8vw;
+            background: #181818;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00d4ff;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 1.2vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-episodes .episode-thumbnail {
+            width: 140px;
+            height: 80px;
+            font-size: 1rem;
+        }
+
+        .play-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .episode-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-icon-ep {
+            width: 3vw;
+            height: 3vw;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5vw;
+        }
+
+        .modal-episodes .play-icon-ep {
+            width: 35px;
+            height: 35px;
+            font-size: 1.2rem;
+        }
+
+        .episode-info-detail {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .episode-number-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5vw;
+        }
+
+        .modal-episodes .episode-number-title {
+            margin-bottom: 0.4rem;
+        }
+
+        .episode-number {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1vw;
+        }
+
+        .modal-episodes .episode-number {
+            font-size: 1rem;
+        }
+
+        .episode-duration {
+            color: #808080;
+            font-size: 0.9vw;
+        }
+
+        .modal-episodes .episode-duration {
+            font-size: 0.85rem;
+        }
+
+        .episode-title {
+            font-size: 1vw;
+            font-weight: 600;
+            margin-bottom: 0.5vw;
+            color: #e5e5e5;
+        }
+
+        .modal-episodes .episode-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .episode-desc {
+            color: #b3b3b3;
+            font-size: 0.9vw;
+            line-height: 1.5;
+        }
+
+        .modal-episodes .episode-desc {
+            font-size: 0.85rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 6vw 2vw;
+            color: #808080;
+            font-size: 1.2vw;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .content-card {
+                min-width: 16vw;
+                width: 16vw;
+            }
+
+            .content-card img {
+                height: 24vw;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .header-left {
+                gap: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                gap: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .header-right {
+                gap: 1rem;
+            }
+
+            .search-box {
+                width: 180px;
+            }
+
+            .search-box input:focus {
+                width: 200px;
+            }
+
+            .hero-banner {
+                height: 60vh;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-meta {
+                font-size: 0.9rem;
+                gap: 1rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-play-btn,
+            .hero-info-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .play-icon,
+            .info-icon {
+                font-size: 1.2rem;
+            }
+
+            .content-card {
+                min-width: 30vw;
+                width: 30vw;
+            }
+
+            .content-card img {
+                height: 45vw;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+
+            .content-title {
+                font-size: 0.85rem;
+            }
+
+            .content-meta {
+                font-size: 0.75rem;
+            }
+
+            .episode-card {
+                flex-direction: column;
+            }
+
+            .episode-thumbnail,
+            .modal-episodes .episode-thumbnail {
+                width: 100%;
+                height: 50vw;
+            }
+
+            .player-modal-content {
+                width: 95%;
+            }
+
+            .modal-title {
+                font-size: 1.4rem;
+            }
+
+            .modal-video-info {
+                padding: 1.5rem 1.5rem 1rem;
+            }
+
+            .modal-episodes {
+                padding: 0 1.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .content-card {
+                min-width: 40vw;
+                width: 40vw;
+            }
+
+            .content-card img {
+                height: 60vw;
+            }
+
+            .header-left {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+            }
+
+            .search-box {
+                width: 0;
+                overflow: hidden;
+            }
+
+            .search-box input {
+                padding: 0;
+                border: none;
+            }
+
+            .user-name {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-play-btn,
+            .hero-info-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .modal-video-info {
+                padding: 1rem;
+            }
+
+            .modal-episodes {
+                padding: 0 1rem 1rem;
+            }
+
+            .modal-title {
+                font-size: 1.2rem;
+            }
+
+            .modal-meta {
+                font-size: 0.85rem;
+                gap: 0.8rem;
+            }
+        }
+        /* NAVIGATION ARROWS - Agregar al final de tu sección <style> */
+
+.content-row {
+    position: relative;
+    padding: 0 50px;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.content-row:hover .nav-arrow {
+    opacity: 1;
+}
+
+.nav-arrow:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow.left {
+    left: 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.nav-arrow.right {
+    right: 0;
+    border-radius: 4px 0 0 4px;
+}
+
+.nav-arrow:disabled {
+    opacity: 0 !important;
+    cursor: not-allowed;
+}
+
+.content-slider {
+    display: flex;
+    gap: 10px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0;
+}
+
+.content-card {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+}
+
+/* Smooth scroll animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.content-slider.scrolling .content-card {
+    animation: slideIn 0.3s ease;
+}
+
+    </style>
+</head>
+<body>
+    <!-- LOGIN PAGE -->
+    <div class="login-container" id="loginPage">
+        <div class="login-logo">AXIUS</div>
+        <div class="login-box">
+            <h2>Iniciar Sesión</h2>
+            <div class="error-message" id="errorMessage">Código incorrecto</div>
+            <div class="input-group">
+                <label>Nombre</label>
+                <input type="text" id="userName" placeholder="Ingresa tu nombre">
+            </div>
+            <div class="input-group">
+                <label>Código de Acceso</label>
+                <input type="password" id="accessCode" placeholder="Ingresa el código">
+            </div>
+            <button class="login-btn" onclick="login()">Ingresar</button>
+        </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div class="app-container" id="mainApp">
+        <!-- HEADER -->
+        <header>
+            <div class="header-left">
+                <div class="logo">AXIUS</div>
+                <nav>
+                    <a class="active" onclick="showSection('home')">Inicio</a>
+                    <a onclick="showSection('movies')">Películas</a>
+                    <a onclick="showSection('series')">Series</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Títulos, personas, géneros" oninput="search()">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="user-info">
+                    <span class="user-name" id="displayName"></span>
+                    <button class="logout-btn" onclick="logout()">Salir</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENT SECTIONS -->
+        <div id="homeSection">
+            <!-- HERO BANNER -->
+            <div class="hero-banner">
+                <div class="hero-content">
+                    <div class="hero-info">
+                        <h1 class="hero-title">AVATAR 3</h1>
+                        <div class="hero-meta">
+                            <span class="hero-match">98% Coincidencia</span>
+                            <span class="hero-year">2025</span>
+                            <span class="hero-rating">⭐ 8.9</span>
+                        </div>
+                        <p class="hero-description">
+                             continúa la saga de James Cameron, con Jake Sully y Neytiri enfrentando al Pueblo de la Ceniza, un clan Na'vi volcánico y agresivo liderado por Varang.
+                        </p>
+                        <div class="hero-buttons">
+                            <button class="hero-play-btn" onclick="playAvatarHero()">
+                                <span class="play-icon">▶</span> Reproducir
+                            </button>
+                            <button class="hero-info-btn">
+                                <span class="info-icon">ℹ</span> Más información
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-fade"></div>
+            </div>
+
+            <!-- CONTINUE WATCHING SECTION -->
+<div class="continue-watching-section" id="continueWatchingSection">
+    <h2 class="section-title">Continuar viendo</h2>
+    <div class="content-row">
+        <div class="content-slider" id="continueWatchingGrid"></div>
+    </div>
+</div>
+
+            <!-- MOVIES -->
+            <div class="content-section">
+                <h2 class="section-title">Películas</h2>
+                <div class="content-row">
+                    <div class="content-slider" id="moviesGrid"></div>
+                </div>
+            </div>
+
+            <!-- SERIES -->
+            <div class="content-section">
+                <h2 class="section-title">Series</h2>
+                <div class="content-row">
+                    <div class="content-slider" id="seriesGrid"></div>
+                </div>
+            </div>
+
+            <!-- ANIME -->
+            <div class="content-section">
+                <h2 class="section-title">Series Animadas</h2>
+                <div class="content-row">
+                    <div class="content-slider" id="animeGrid"></div>
+                </div>
+            </div>
+
+            <!-- ANIME PELIS -->
+            <div class="content-section">
+                <h2 class="section-title">Peliculas Animadas</h2>
+                <div class="content-row">
+                    <div class="content-slider" id="animepeli"></div>
+                </div>
+            </div>
+        </div>
+       
+        
+
+        <!-- SEARCH RESULTS -->
+        <div id="searchResults" class="content-section hidden">
+            <h2 class="section-title">Resultados de Búsqueda</h2>
+            <div class="content-row">
+                <div class="content-slider" id="searchGrid"></div>
+            </div>
+            <div class="no-results hidden" id="noResults">No se encontraron resultados</div>
+        </div>
+
+        <!-- VIDEO PLAYER MODAL -->
+        <div class="player-modal" id="playerModal">
+            <div class="player-modal-overlay" onclick="closePlayer()"></div>
+            <div class="player-modal-content">
+                <button class="close-player-btn" onclick="closePlayer()">✕</button>
+                <div class="modal-video-player">
+                    <iframe id="videoIframe" allowfullscreen></iframe>
+                </div>
+                <div class="modal-video-info">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <div class="modal-meta">
+                        <span id="modalYear"></span>
+                        <span id="modalRating"></span>
+                        <span id="modalGenre"></span>
+                    </div>
+                    <p class="modal-description" id="modalDescription"></p>
+                </div>
+                <div class="modal-episodes" id="modalEpisodes"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DATABASE
+        const contentDatabase = {
+            movies: [
+                {
+                    id: 'Enola Holmes 2',
+                    title: 'Enola Holmes 2',
+                    year: '2023',
+                    rating: '8.8',
+                    genre: 'Trama,Aventura',
+                    image: 'https://m.media-amazon.com/images/M/MV5BZjRjZjZhNzUtMDQyMC00OWZmLWIzMjQtZDM2OWRhNzgwOGU2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                    description: 'Después del éxito de su primer caso, Enola Holmes (Millie Bobby Brown) sigue los pasos de su popular hermano, Sherlock (Henry Cavill), abriendo su propia agencia, descubriendo que la vida como mujer detective a sueldo no es tan fácil como parece. Resignada a aceptar la realidad como adulta.',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#bgtsa'
+                },
+                {
+                    id: 'Indiana Jones y el dial del destino',
+                    title: 'Indiana Jones y el dial del destino',
+                    year: '2014',
+                    rating: '8.7',
+                    genre: 'Ciencia Ficción, Aventura',
+                    image: 'https://lumiere-a.akamaihd.net/v1/images/image_4fb74ed3.jpeg?region=0,0,540,810',
+                    description: 'Un equipo de exploradores viaja a través de un agujero de gusano en el espacio.',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#isxrw'
+                },
+                {
+                    id: 'Black Adam',
+                    title: 'Black Adam',
+                    year: '2023',
+                    rating: '8.7',
+                    genre: 'Acción, Ciencia Ficción',
+                    image: 'https://pics.filmaffinity.com/black_adam-931758598-large.jpg',
+                    description: 'Un hacker descubre la impactante verdad sobre su realidad.',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#s95l6'
+                },
+                {
+                    id: 'avatar',
+                    title: 'Avatar Fuego y Cenizas',
+                    year: '2025',
+                    rating: '8.9',
+                    genre: 'Aventura, Fantasía',
+                    image: 'https://pics.filmaffinity.com/Avatar_Fuego_y_ceniza-573008793-large.jpg',
+                    description: 'continúa la saga de James Cameron, con Jake Sully y Neytiri enfrentando al Pueblo de la Ceniza, un clan Navi volcánico y agresivo liderado por Varang.',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#jmufy'
+                },
+                {
+                    id: 'Shazam',
+                    title: '¡Shazam! La furia de los dioses',
+                    year: '2021',
+                    rating: '8.9',
+                    genre: 'Aventura, Fantasía',
+                    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnE0fRm2xCAVY5Ntl-bn9q3sHRNe1cUOuY2Q&s',
+                    description: 'Billy Batson y sus hermanos adoptivos, que se transforman en superhéroes al decir "¡Shazam!", se ven obligados a volver a la acción y luchar contra las Hijas de Atlas, a quienes deben evitar que use un arma que podría destruir el mundo.',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#k3roe'
+                },
+                {
+                    id: 'Diluvio',
+                    title: 'El Gran Diluvio',
+                    year: '2021',
+                    rating: '8.9',
+                    genre: 'Caotico',
+                    image: 'https://es.web.img3.acsta.net/img/ff/11/ff115217ebe8b8c97a6682390bc4d160.jpg',
+                    description: 'Billy Batson y sus hermanos adoptivos, que se transforman en superhéroes al decir "¡Shazam!", se ven obligados a volver a la acción y luchar contra las Hijas de Atlas, a quienes deben evitar que use un arma que podría destruir el mundo.',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#evp5u'
+                },
+                {
+                    id: 'Piter Pan',
+                    title: 'Peter Pan y Wendy',
+                    year: '2018',
+                    rating: '8.9',
+                    genre: 'Fantasia',
+                    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRph4vlrLwGkWdKwAyS6b2Fa4WcfL935D-fQ&s',
+                    description: 'Wendy Darling una jovencita sin deseos de ir al internado, conoce a Peter Pan, un chico que se niega a crecer. Junto con sus hermanos y la pequeña hada, Tinkerbell, viaja con Peter al mágico mundo de Nunca Jamás. Ahí se enfrenta al temible pirata, Capitán Garfio y se embarca en una emocionante aventura que cambiará su vida para siempre.',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#8iqjy'
+                },
+                {
+                    id: 'Mi abuela es un peligro 3',
+                    title: 'Mi abuela es un peligro 3',
+                    year: '2016',
+                    rating: '8.9',
+                    genre: 'Caotico',
+                    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSES4dxO8tW05Y8oGodOs3xcevVkXo5WSCz_g&s',
+                    description: 'Tercera entrega de la saga "Mi abuela es un peligro". Martin Lawrence regresa como el agente del FBI Malcolm Turner y como su alter ego Hattie Mae Pierce, "La Abuela". Pero esta vez, lo acompañará su hijo Trent, testigo de un asesinato perpetrado por unos gángsteres rusos, lo que los obligará a camuflarse en una Escuela de Arte para chicas, donde tendrán que encontrar al asesino antes de que él los encuentre a ellos',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#halmo'
+                },
+            
+                
+            ],
+            animepeli: [
+                
+                 {
+                    id: 'Toy Story 1',
+                    title: 'Toy Story',
+                    year: '1995',
+                    rating: '9.7',
+                    genre: 'Animada',
+                    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi1PqOtM-qkvlpgxmlB3_J3nBBuxg89nzCVg&s',
+                    description: 'La trama sigue a Woody, un vaquero de juguete que ve amenazado su estatus como favorito de Andy con la llegada de Buzz Lightyear, un moderno guardián espacial. Ambos deben superar sus celos y rivalidad tras perderse, formando una alianza para regresar a casa. ',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#s95fk'
+                },
+                {
+                    id: 'Pollitos en Fuga',
+                    title: 'Pollitos en Fuga',
+                    year: '1995',
+                    rating: '8.0',
+                    genre: 'Animada',
+                    image: 'https://media.themoviedb.org/t/p/w500/jSp4EC1deF4xboQ1nz3tkv4yanh.jpg',
+                    description: 'Cuando un gallo entra aparentemente volando a una granja de pollos, las gallinas lo ven como una oportunidad para escapar de sus malvados dueños. ',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#5cdwk'
+                },
+                {
+                    id: 'Patrulla De Aterrizaje',
+                    title: 'Patrulla De Aterrizaje',
+                    year: '2025',
+                    rating: '8.0',
+                    genre: 'Animada',
+                    image: 'https://image.tmdb.org/t/p/original/nmbyvqhJE9MMSW0zYCvCsEfgY0C.jpg',
+                    description: '',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#t63tq'
+                },
+                {
+                    id: 'Cadaver De La Novia',
+                    title: 'Cadaver De La Novia',
+                    year: '1999',
+                    rating: '8.0',
+                    genre: 'Animada',
+                    image: 'https://es.web.img3.acsta.net/medias/nmedia/18/89/76/03/20065463.jpg',
+                    description: '',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#lhdlp'
+                },
+                {
+                    id: 'Demon Slayer: Kimetsu no Yaiba Infinity Castle',
+                    title: 'Demon Slayer: Kimetsu no Yaiba Infinity Castle',
+                    year: '2025',
+                    rating: '9.9',
+                    genre: 'Animada',
+                    image: 'https://a.storyblok.com/f/178900/1064x1596/bbc9915fbb/demon-slayer-kimetsu-no-yaiba-infinity-castle-new-visual-en.png/m/filters:quality(95)format(webp)',
+                    description: '',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#cu5c9'
+                },
+                {
+                    id: 'Ralph Demoledor',
+                    title: 'Ralph Demoledor',
+                    year: '2012',
+                    rating: '8.0',
+                    genre: 'Animada',
+                    image: 'https://es.web.img3.acsta.net/pictures/14/03/26/10/06/518055.jpg',
+                    description: '',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#9jaex'
+                },
+                {
+                    id: 'Buscando a Nemo',
+                    title: 'Buscando a Nemo',
+                    year: '2003',
+                    rating: '8.0',
+                    genre: 'Animada',
+                    image: 'https://m.media-amazon.com/images/S/pv-target-images/93070eaf535856645544357f3ad17c626945ec8c0f8c1b707c8fa405728447a2.jpg',
+                    description: '',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#jmb1m'
+                },
+                {
+                    id: 'Enredados',
+                    title: 'Enredados',
+                    year: '2011',
+                    rating: '9.0',
+                    genre: 'Animada',
+                    image: 'https://image.tmdb.org/t/p/original/bFUreK1CxkUwk4y6W2Qoo88l0UF.jpg',
+                    description: '',
+                    type: 'movie',
+                    videoUrl: 'https://axius.seeks.cloud/#s9hj1'
+                },
+            ],
+            series: [
+                {
+    id: 'welcome-to-derry',
+    title: 'Welcome to Derry',
+    year: '2025',
+    rating: '8.5',
+    genre: 'Terror, Suspenso, Drama',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKV_27F2ybgmWuZTY-gQuakGY87ouHbDnK9g&s',
+    description: 'Precuela de IT que explora los orígenes del mal en Derry y los ciclos de terror que Pennywise ha provocado a lo largo de décadas.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                {
+                    number: 1,
+                    title: 'El Inicio del Ciclo',
+                    duration: '54 min',
+                    description: 'En 1962, Derry enfrenta una ola de desapariciones mientras se funda el pueblo.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a0a0a/ff0000?text=EP1',
+                    videoUrl: 'https://axius.seeks.cloud/#s9ifi'
+                },
+                {
+                    number: 2,
+                    title: 'Los Primeros Perdedores',
+                    duration: '51 min',
+                    description: 'Un grupo de residentes comienza a notar patrones extraños en las tragedias del pueblo.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a0a0a/ff0000?text=EP2',
+                    videoUrl: 'https://axius.seeks.cloud/#k3rew'
+                },
+                {
+                    number: 3,
+                    title: 'El Carnaval',
+                    duration: '49 min',
+                    description: 'Durante el carnaval anual, Pennywise hace su primera aparición pública.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a0a0a/ff0000?text=EP3',
+                    videoUrl: 'https://axius.seeks.cloud/#cu5yd'
+                },
+                {
+                    number: 4,
+                    title: 'Secretos Enterrados',
+                    duration: '52 min',
+                    description: 'Se revelan los oscuros secretos de la fundación de Derry y su conexión con IT.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a0a0a/ff0000?text=EP4',
+                    videoUrl: 'https://axius.seeks.cloud/#wyocu'
+                },
+                {
+                    number: 5,
+                    title: 'La Explosión del Black Spot',
+                    duration: '55 min',
+                    description: 'El trágico incendio de 1930 que cobró decenas de vidas afroamericanas.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a0a0a/ff0000?text=EP5',
+                    videoUrl: ''
+                },
+                {
+                    number: 6,
+                    title: 'El Ciclo de 27 Años',
+                    duration: '50 min',
+                    description: 'Se descubre el patrón: cada 27 años, el mal despierta en Derry.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a0a0a/ff0000?text=EP6',
+                    videoUrl: ''
+                },
+                {
+                    number: 7,
+                    title: 'Las Alcantarillas Antiguas',
+                    duration: '53 min',
+                    description: 'Explorando los túneles bajo Derry que existían antes de la llegada de los colonos.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a0a0a/ff0000?text=EP7',
+                    videoUrl: ''
+                },
+                {
+                    number: 8,
+                    title: 'Todos Flotan Aquí Abajo',
+                    duration: '58 min',
+                    description: 'El final de temporada conecta directamente con los eventos de IT (2017).',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a0a0a/ff0000?text=EP8',
+                    videoUrl: ''
+                }
+            ]
+        }
+    ]
+},
+{
+    id: 'el-monstruo-de-florencia',
+    title: 'El Monstruo de Florencia',
+    year: '2024',
+    rating: '8.1',
+    genre: 'Crimen, Thriller, Misterio',
+    image: 'https://es.web.img3.acsta.net/img/87/f5/87f52e05203656a652013f5a72cbe05b.jpg',
+    description: 'Basada en los crímenes reales del asesino en serie que aterrorizó la campiña toscana entre 1968 y 1985, uno de los casos más desconcertantes de Italia.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                {
+                    number: 1,
+                    title: 'La Primera Pareja',
+                    duration: '55 min',
+                    description: 'En 1968, una pareja es asesinada brutalmente en su auto cerca de Florencia, marcando el inicio del terror.',
+                    thumbnail: 'https://via.placeholder.com/150x85/4a0e0e/d4af37?text=EP1',
+                    videoUrl: 'https://axius.seeks.cloud/#9jskp'
+                },
+                {
+                    number: 2,
+                    title: 'El Patrón del Monstruo',
+                    duration: '52 min',
+                    description: 'La investigación revela un patrón aterrador mientras los crímenes continúan en la campiña toscana.',
+                    thumbnail: 'https://via.placeholder.com/150x85/4a0e0e/d4af37?text=EP2',
+                    videoUrl: 'https://axius.seeks.cloud/#abhxj'
+                },
+                {
+                    number: 3,
+                    title: 'Pistas y Sospechosos',
+                    duration: '54 min',
+                    description: 'La policía arresta a varios sospechosos, pero los asesinatos no cesan y surgen teorías oscuras.',
+                    thumbnail: 'https://via.placeholder.com/150x85/4a0e0e/d4af37?text=EP3',
+                    videoUrl: 'https://axius.seeks.cloud/#s9iqh'
+                },
+                {
+                    number: 4,
+                    title: 'El Enigma Sin Resolver',
+                    duration: '58 min',
+                    description: 'Décadas después del último crimen, el monstruo sigue siendo un misterio que obsesiona a Italia.',
+                    thumbnail: 'https://via.placeholder.com/150x85/4a0e0e/d4af37?text=EP4',
+                    videoUrl: 'https://axius.seeks.cloud/#upcxu'
+                }
+            ]
+        }
+    ]
+},
+{
+    id: 'dark',
+    title: 'Dark',
+    year: '2017-2020',
+    rating: '8.8',
+    genre: 'Ciencia Ficción, Misterio, Thriller',
+    image: 'https://es.web.img3.acsta.net/pictures/17/11/10/12/27/3064798.jpg',
+    description: 'En el pueblo alemán de Winden, la desaparición de dos niños revela los secretos de cuatro familias y un viaje en el tiempo que abarca varias generaciones.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                {
+                    number: 1,
+                    title: 'Secretos',
+                    duration: '51 min',
+                    description: 'Un niño desaparece en el bosque cerca de una planta nuclear abandonada.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP1',
+                    videoUrl: 'https://axius.seeks.cloud/#lhdwl'
+                },
+                {
+                    number: 2,
+                    title: 'Mentiras',
+                    duration: '44 min',
+                    description: 'Jonas descubre algo extraño en la casa de su padre fallecido.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP2',
+                    videoUrl: 'https://axius.seeks.cloud/#8iqeq'
+                },
+                {
+                    number: 3,
+                    title: 'Pasado y Presente',
+                    duration: '45 min',
+                    description: 'Se revelan conexiones entre las desapariciones de 2019 y 1986.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP3',
+                    videoUrl: 'https://axius.seeks.cloud/#upcda'
+                },
+                {
+                    number: 4,
+                    title: 'Doble Vida',
+                    duration: '47 min',
+                    description: 'Ulrich investiga el pasado mientras Charlotte busca pistas en el presente.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP4',
+                    videoUrl: 'https://axius.seeks.cloud/#9js8b'
+                },
+                {
+                    number: 5,
+                    title: 'Verdades',
+                    duration: '45 min',
+                    description: 'Hannah descubre la verdad sobre Ulrich y Katharina.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP5',
+                    videoUrl: 'https://axius.seeks.cloud/#evphb'
+                },
+                {
+                    number: 6,
+                    title: 'Sic Mundus Creatus Est',
+                    duration: '46 min',
+                    description: 'Ulrich hace un descubrimiento impactante en 1953.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP6',
+                    videoUrl: 'https://axius.seeks.cloud/#cu5fx'
+                },
+                {
+                    number: 7,
+                    title: 'Encrucijadas',
+                    duration: '47 min',
+                    description: 'Jonas aprende la verdad sobre su familia y el tiempo.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP7',
+                    videoUrl: 'https://axius.seeks.cloud/#s9izk'
+                },
+                {
+                    number: 8,
+                    title: 'Como Empezó, Así Termina',
+                    duration: '48 min',
+                    description: 'El pasado y el futuro colisionan en Winden.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP8',
+                    videoUrl: 'https://axius.seeks.cloud/#is8vn'
+                },
+                {
+                    number: 9,
+                    title: 'Todo Está Conectado',
+                    duration: '49 min',
+                    description: 'Jonas viaja al futuro y descubre la devastación de Winden.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP9',
+                    videoUrl: 'https://axius.seeks.cloud/#bgakl'
+                },
+                {
+                    number: 10,
+                    title: 'Alfa y Omega',
+                    duration: '57 min',
+                    description: 'El ciclo se cierra mientras se revelan más misterios sobre el tiempo.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a1a2e/edb10a?text=EP10',
+                    videoUrl: 'https://axius.seeks.cloud/#k3rmv'
+                }
+            ]
+        }
+    ]
+},
+{
+    id: 'wednesday',
+    title: 'Merlina',
+    year: '2022-',
+    rating: '8.1',
+    genre: 'Comedia, Fantasía, Misterio',
+    image: 'https://m.media-amazon.com/images/M/MV5BNDM2ZTA0NjQtMjk4Ni00ODkyLTk3ZjMtYzFjZThjYzQzNWViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+    description: 'Merlina Addams intenta dominar sus habilidades psíquicas, frustrar una monstruosa ola de asesinatos que aterroriza la ciudad y resolver el misterio sobrenatural que envolvió a sus padres hace 25 años, todo mientras navega las complejas relaciones sociales de la Academia Nevermore.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                {
+                    number: 1,
+                    title: 'El Primer Día de Clases de Merlina',
+                    duration: '57 min',
+                    description: 'Merlina llega a la Academia Nevermore tras ser expulsada de su anterior escuela.',
+                    thumbnail: 'https://via.placeholder.com/150x85/000000/ffffff?text=EP1',
+                    videoUrl: 'https://axius.seeks.cloud/#cu5qk'
+                },
+                {
+                    number: 2,
+                    title: 'Ay, Pobre de Mí',
+                    duration: '47 min',
+                    description: 'Merlina se enfrenta a Bianca en el campo de tiro con arco y tiene una visión perturbadora.',
+                    thumbnail: 'https://via.placeholder.com/150x85/000000/ffffff?text=EP2',
+                    videoUrl: 'https://axius.seeks.cloud/#vzegh'
+                },
+                {
+                    number: 3,
+                    title: 'Amigo o Enemigo',
+                    duration: '46 min',
+                    description: 'Merlina investiga al monstruo mientras lidia con sus compañeros de escuela.',
+                    thumbnail: 'https://via.placeholder.com/150x85/000000/ffffff?text=EP3',
+                    videoUrl: 'https://axius.seeks.cloud/#5cxde'
+                },
+                {
+                    number: 4,
+                    title: 'Escándalo de Citas',
+                    duration: '50 min',
+                    description: 'Llega el baile de la cosecha y Merlina recibe una invitación inesperada.',
+                    thumbnail: 'https://via.placeholder.com/150x85/000000/ffffff?text=EP4',
+                    videoUrl: 'https://axius.seeks.cloud/#abh3n'
+                },
+                {
+                    number: 5,
+                    title: 'Tienes Correo',
+                    duration: '45 min',
+                    description: 'Los padres de Merlina visitan la escuela en el fin de semana de los padres.',
+                    thumbnail: 'https://via.placeholder.com/150x85/000000/ffffff?text=EP5',
+                    videoUrl: 'https://axius.seeks.cloud/#peuaq'
+                },
+                {
+                    number: 6,
+                    title: 'Quid Pro Quo',
+                    duration: '47 min',
+                    description: 'Merlina descubre más sobre la historia de sus padres en Nevermore.',
+                    thumbnail: 'https://via.placeholder.com/150x85/000000/ffffff?text=EP6',
+                    videoUrl: 'https://axius.seeks.cloud/#6otss'
+                },
+                {
+                    number: 7,
+                    title: 'Si No Puedes Vencerlos',
+                    duration: '48 min',
+                    description: 'Merlina se une al equipo de canoa del colegio para sus propios fines.',
+                    thumbnail: 'https://via.placeholder.com/150x85/000000/ffffff?text=EP7',
+                    videoUrl: 'https://axius.seeks.cloud/#is8xd'
+                },
+                {
+                    number: 8,
+                    title: 'Baño de Sangre',
+                    duration: '50 min',
+                    description: 'La identidad del monstruo es finalmente revelada en una noche crucial.',
+                    thumbnail: 'https://via.placeholder.com/150x85/000000/ffffff?text=EP8',
+                    videoUrl: 'https://axius.seeks.cloud/#halkd'
+                }
+            ]
+        }
+    ]
+},
+                {
+    id: 'stranger-things',
+    title: 'Stranger Things',
+    year: '2016-2022',
+    rating: '8.7',
+    genre: 'Drama, Terror, Ciencia Ficción',
+    image: 'https://m.media-amazon.com/images/I/91FTgJZL-kL._AC_UF894,1000_QL80_.jpg',
+    description: 'Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales y una niña muy especial.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                { number: 1, title: 'La desaparición de Will Byers', duration: '47 min', description: 'Will desaparece misteriosamente.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E1', videoUrl: 'https://axius.seeks.cloud/#hakno' },
+                { number: 2, title: 'La chica rara de la calle Maple', duration: '55 min', description: 'Once aparece.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E2', videoUrl: 'https://axius.seeks.cloud/#m1phn' },
+                { number: 3, title: 'Acechuco', duration: '51 min', description: 'Once se adapta al grupo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E3', videoUrl: 'https://axius.seeks.cloud/#gn6iw' },
+                { number: 4, title: 'El cuerpo', duration: '49 min', description: 'Una impactante revelación.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E4', videoUrl: 'https://axius.seeks.cloud/#peakm' },
+                { number: 5, title: 'La pulga y el acróbata', duration: '53 min', description: 'El portal comienza a revelarse.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E5', videoUrl: 'https://axius.seeks.cloud/#t6izp' },
+                { number: 6, title: 'El monstruo', duration: '46 min', description: 'Once enfrenta el peligro.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E6', videoUrl: 'https://axius.seeks.cloud/#8izgt' },
+                { number: 7, title: 'La bañera', duration: '41 min', description: 'El grupo intenta rescatar a Will.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E7', videoUrl: 'https://axius.seeks.cloud/#isxnb' },
+                { number: 8, title: 'El otro lado', duration: '55 min', description: 'Confrontación final.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E8', videoUrl: 'https://axius.seeks.cloud/#1qea5' }
+            ]
+        },
+        {
+            number: 2,
+            episodes: [
+                { number: 1, title: 'MADMAX', duration: '48 min', description: 'Nuevas amenazas aparecen.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E1', videoUrl: 'https://axius.seeks.cloud/#st2e1' },
+                { number: 2, title: 'Trick or Treat, Freak', duration: '56 min', description: 'Halloween en Hawkins.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E2', videoUrl: 'https://axius.seeks.cloud/#st2e2' },
+                { number: 3, title: 'El renacuajo', duration: '51 min', description: 'Dustin hace un descubrimiento.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E3', videoUrl: 'https://axius.seeks.cloud/#st2e3' },
+                { number: 4, title: 'Will el Sabio', duration: '46 min', description: 'Will vuelve a estar en peligro.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E4', videoUrl: 'https://axius.seeks.cloud/#st2e4' },
+                { number: 5, title: 'Dig Dug', duration: '58 min', description: 'Hopper investiga túneles.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E5', videoUrl: 'https://axius.seeks.cloud/#st2e5' },
+                { number: 6, title: 'El espía', duration: '46 min', description: 'El grupo se divide.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E6', videoUrl: 'https://axius.seeks.cloud/#st2e6' },
+                { number: 7, title: 'La hermana perdida', duration: '45 min', description: 'Once descubre su pasado.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E7', videoUrl: 'https://axius.seeks.cloud/#st2e7' },
+                { number: 8, title: 'El Azotamentes', duration: '57 min', description: 'Batalla final.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E8', videoUrl: 'https://axius.seeks.cloud/#st2e8' },
+                { number: 9, title: 'El portal', duration: '62 min', description: 'El portal es cerrado.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E9', videoUrl: 'https://axius.seeks.cloud/#st2e9' }
+            ]
+        },
+        {
+            number: 3,
+            episodes: [
+                { number: 1, title: 'Suzie, ¿me copias?', duration: '50 min', description: 'El verano trae problemas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E1', videoUrl: 'https://axius.seeks.cloud/#st3e1' },
+                { number: 2, title: 'Las ratas del centro comercial', duration: '52 min', description: 'Algo extraño ocurre.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E2', videoUrl: 'https://axius.seeks.cloud/#st3e2' },
+                { number: 3, title: 'El caso de la salvavidas desaparecida', duration: '49 min', description: 'Una investigación peligrosa.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E3', videoUrl: 'https://axius.seeks.cloud/#st3e3' },
+                { number: 4, title: 'La prueba de la sauna', duration: '55 min', description: 'El enemigo se revela.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E4', videoUrl: 'https://axius.seeks.cloud/#st3e4' },
+                { number: 5, title: 'El ejército desollado', duration: '51 min', description: 'El peligro crece.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E5', videoUrl: 'https://axius.seeks.cloud/#st3e5' },
+                { number: 6, title: 'E Pluribus Unum', duration: '59 min', description: 'Todo se conecta.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E6', videoUrl: 'https://axius.seeks.cloud/#st3e6' },
+                { number: 7, title: 'La mordida', duration: '56 min', description: 'Once está en peligro.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E7', videoUrl: 'https://axius.seeks.cloud/#st3e7' },
+                { number: 8, title: 'La batalla de Starcourt', duration: '77 min', description: 'Final épico.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E8', videoUrl: 'https://axius.seeks.cloud/#st3e8' }
+            ]
+        },
+        {
+            number: 4,
+            episodes: [
+                { number: 1, title: 'El club Hellfire', duration: '78 min', description: 'Un nuevo villano aparece.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E1', videoUrl: 'https://axius.seeks.cloud/#st4e1' },
+                { number: 2, title: 'La maldición de Vecna', duration: '75 min', description: 'Hawkins en peligro.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E2', videoUrl: 'https://axius.seeks.cloud/#st4e2' },
+                { number: 3, title: 'El monstruo y la superheroína', duration: '64 min', description: 'Once entrena.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E3', videoUrl: 'https://axius.seeks.cloud/#st4e3' },
+                { number: 4, title: 'Querida Billy', duration: '78 min', description: 'Max enfrenta sus miedos.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E4', videoUrl: 'https://axius.seeks.cloud/#st4e4' },
+                { number: 5, title: 'El proyecto Nina', duration: '76 min', description: 'El pasado de Once.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E5', videoUrl: 'https://axius.seeks.cloud/#st4e5' },
+                { number: 6, title: 'La inmersión', duration: '74 min', description: 'El grupo se separa.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E6', videoUrl: 'https://axius.seeks.cloud/#st4e6' },
+                { number: 7, title: 'La masacre del laboratorio', duration: '98 min', description: 'El origen del mal.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E7', videoUrl: 'https://axius.seeks.cloud/#st4e7' },
+                { number: 8, title: 'Papá', duration: '85 min', description: 'Once toma una decisión.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E8', videoUrl: 'https://axius.seeks.cloud/#st4e8' },
+                { number: 9, title: 'El plan final', duration: '142 min', description: 'Final de temporada.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E9', videoUrl: 'https://axius.seeks.cloud/#st4e9' }
+            ]
+        }
+    ]
+},{
+    id: 'desde-dentro',
+    title: 'Desde dentro',
+    year: '2025',
+    rating: '7.9',
+    genre: 'Drama, Suspense, Thriller',
+    image: 'https://es.web.img3.acsta.net/pictures/22/10/25/14/55/2486487.jpg',
+    description: 'Una serie que explora los oscuros secretos de una institución desde la perspectiva de quienes viven en su interior.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                {
+                    number: 1,
+                    title: 'El Ingreso',
+                    duration: '52 min',
+                    description: 'Los nuevos residentes llegan al centro y comienzan a descubrir que nada es lo que parece.',
+                    thumbnail: 'https://via.placeholder.com/150x85/2c3e50/ecf0f1?text=EP1',
+                    videoUrl: 'https://axius.seeks.cloud/#x5zq5'
+                },
+                {
+                    number: 2,
+                    title: 'Primeras Sospechas',
+                    duration: '48 min',
+                    description: 'Anomalías en las rutinas diarias despiertan la curiosidad de algunos internos.',
+                    thumbnail: 'https://via.placeholder.com/150x85/2c3e50/ecf0f1?text=EP2',
+                    videoUrl: 'https://axius.seeks.cloud/#s9i3u'
+                },
+                {
+                    number: 3,
+                    title: 'La Verdad Oculta',
+                    duration: '50 min',
+                    description: 'Un descubrimiento inesperado revela la verdadera naturaleza del lugar.',
+                    thumbnail: 'https://via.placeholder.com/150x85/2c3e50/ecf0f1?text=EP3',
+                    videoUrl: 'https://axius.seeks.cloud/#evpj1'
+                },
+                {
+                    number: 4,
+                    title: 'Sin Salida',
+                    duration: '54 min',
+                    description: 'Los protagonistas enfrentan una decisión crucial que cambiará todo para siempre.',
+                    thumbnail: 'https://via.placeholder.com/150x85/2c3e50/ecf0f1?text=EP4',
+                    videoUrl: 'https://axius.seeks.cloud/#8iqrh'
+                }
+            ]
+        }
+    ]
+},
+{
+    id: 'adolescencia',
+    title: 'Adolescencia',
+    year: '2024',
+    rating: '7.8',
+    genre: 'Drama, Crimen, Thriller',
+    image: 'https://m.media-amazon.com/images/M/MV5BNjE0NWI3MjYtNzEyOS00YjUwLWE4NmUtZjNjNjBmMDYyNTlmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+    description: 'Inspirada en hechos reales, esta serie explora las consecuencias devastadoras cuando un grupo de adolescentes se ve envuelto en un caso criminal que cambiará sus vidas para siempre. Una mirada cruda sobre la justicia, la culpabilidad y el sistema que juzga a los jóvenes.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                {
+                    number: 1,
+                    title: 'La noche que todo cambió',
+                    duration: '52 min',
+                    description: 'Un incidente en una fiesta desencadena una investigación policial que involucrará a varios adolescentes.',
+                    thumbnail: 'https://via.placeholder.com/150x85/8e44ad/ecf0f1?text=EP1',
+                    videoUrl: 'https://axius.seeks.cloud/#6otaa'
+                },
+                {
+                    number: 2,
+                    title: 'Versiones contradictorias',
+                    duration: '48 min',
+                    description: 'Los testimonios de los involucrados no coinciden y la policía profundiza en sus interrogatorios.',
+                    thumbnail: 'https://via.placeholder.com/150x85/8e44ad/ecf0f1?text=EP2',
+                    videoUrl: 'https://axius.seeks.cloud/#is8k8'
+                },
+                {
+                    number: 3,
+                    title: 'El peso de la verdad',
+                    duration: '50 min',
+                    description: 'Las familias luchan por proteger a sus hijos mientras la presión mediática aumenta.',
+                    thumbnail: 'https://via.placeholder.com/150x85/8e44ad/ecf0f1?text=EP3',
+                    videoUrl: 'https://axius.seeks.cloud/#nfgeb'
+                },
+                {
+                    number: 4,
+                    title: 'El juicio',
+                    duration: '55 min',
+                    description: 'El caso llega a los tribunales y los adolescentes enfrentan las consecuencias de aquella noche.',
+                    thumbnail: 'https://via.placeholder.com/150x85/8e44ad/ecf0f1?text=EP4',
+                    videoUrl: 'https://axius.seeks.cloud/#ow6ba'
+                }
+            ]
+        }
+    ]
+},
+{
+    id: 'superman-lois',
+    title: 'Superman y Lois',
+    year: '2021-2024',
+    rating: '7.5',
+    genre: 'Acción, Aventura, Drama, Superhéroes',
+    image: 'https://es.web.img3.acsta.net/pictures/23/02/27/10/41/0199201.jpg',
+    description: 'Clark Kent y Lois Lane regresan a Smallville con sus hijos adolescentes gemelos, donde deben equilibrar las responsabilidades de ser padres mientras Clark protege al mundo como Superman.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                {
+                    number: 1,
+                    title: 'Piloto',
+                    duration: '65 min',
+                    description: 'Los Kent regresan a Smallville tras la muerte de Martha Kent y descubren nuevos desafíos.',
+                    thumbnail: 'https://via.placeholder.com/150x85/c0392b/ecf0f1?text=EP1',
+                    videoUrl: 'https://axius.seeks.cloud/#k3rxk'
+                },
+                {
+                    number: 2,
+                    title: 'Legado',
+                    duration: '42 min',
+                    description: 'Los gemelos se adaptan a su nueva vida mientras un antiguo enemigo amenaza la ciudad.',
+                    thumbnail: 'https://via.placeholder.com/150x85/c0392b/ecf0f1?text=EP2',
+                    videoUrl: 'https://axius.seeks.cloud/#bga96'
+                },
+                {
+                    number: 3,
+                    title: 'La perrera',
+                    duration: '43 min',
+                    description: 'Lois investiga una historia mientras Clark lidia con las consecuencias de sus acciones.',
+                    thumbnail: 'https://via.placeholder.com/150x85/c0392b/ecf0f1?text=EP3',
+                    videoUrl: 'https://axius.seeks.cloud/#6otuu'
+                },
+                {
+                    number: 4,
+                    title: 'Recuerdos',
+                    duration: '42 min',
+                    description: 'Clark reflexiona sobre su pasado mientras enfrenta un peligro en el presente.',
+                    thumbnail: 'https://via.placeholder.com/150x85/c0392b/ecf0f1?text=EP4',
+                    videoUrl: 'https://axius.seeks.cloud/#jm9b9'
+                },
+                {
+                    number: 5,
+                    title: 'El mejor de los mundos',
+                    duration: '43 min',
+                    description: 'Un ser de otro mundo llega a Smallville con intenciones desconocidas.',
+                    thumbnail: 'https://via.placeholder.com/150x85/c0392b/ecf0f1?text=EP5',
+                    videoUrl: 'https://axius.seeks.cloud/#ow6pu'
+                },
+                {
+                    number: 6,
+                    title: 'Gemelos rotos',
+                    duration: '42 min',
+                    description: 'Jordan descubre algo sobre sí mismo que cambia todo para la familia Kent.',
+                    thumbnail: 'https://via.placeholder.com/150x85/c0392b/ecf0f1?text=EP6',
+                    videoUrl: 'https://axius.seeks.cloud/#halid'
+                }
+            ]
+        }
+    ]
+},
+
+            ],
+            anime: [
+                {
+                    id: 'isekai',
+                    title: 'Isekai Nonbiri Nouka',
+                    year: '2023',
+                    rating: '8.5',
+                    genre: 'Fantasía, Isekai',
+                    image: 'https://imusic.b-cdn.net/images/item/original/961/4524135110961.jpg?naitou-kinosuke-2023-isekai-nonbiri-nouka-gekan-mbd&class=scaled&v=1674442193',
+                    description: 'Una relajante historia de agricultura en otro mundo. Hiraku comienza una nueva vida cultivando tierras y construyendo una aldea próspera.',
+                    type: 'series',
+                    seasons: [
+                        {
+                            number: 1,
+                            episodes: [
+                                {
+                                    number: 1,
+                                    title: 'Llegada a otro mundo',
+                                    duration: '24 min',
+                                    description: 'Hiraku muere y es reencarnado en otro mundo con un cuerpo sano y una herramienta todopoderosa para la agricultura.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP1',
+                                    videoUrl: 'https://axius.seeks.cloud/#jmufy'
+                                },
+                                {
+                                    number: 2,
+                                    title: 'Primeros habitantes',
+                                    duration: '24 min',
+                                    description: 'Hiraku comienza a cultivar sus tierras y recibe visitas inesperadas que cambiarán su vida solitaria.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP2',
+                                    videoUrl: 'https://axius.seeks.cloud/#ow9z1'
+                                },
+                                {
+                                    number: 3,
+                                    title: 'Expandiendo el asentamiento',
+                                    duration: '24 min',
+                                    description: 'La aldea comienza a crecer con nuevos residentes que aportan diferentes habilidades.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP3',
+                                    videoUrl: 'https://axius.seeks.cloud/#k3qt9'
+                                },
+                                {
+                                    number: 4,
+                                    title: 'Vida en la aldea',
+                                    duration: '24 min',
+                                    description: 'Hiraku establece rutinas y reglas para la convivencia pacífica en su creciente comunidad.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP4',
+                                    videoUrl: 'https://axius.seeks.cloud/#wyjd5'
+                                },
+                                {
+                                    number: 5,
+                                    title: 'Nuevos desafíos',
+                                    duration: '24 min',
+                                    description: 'La aldea enfrenta sus primeros problemas mientras continúa creciendo y prosperando.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP5',
+                                    videoUrl: 'https://axius.seeks.cloud/#k3qa6'
+                                },
+                                {
+                                    number: 6,
+                                    title: 'Visitantes especiales',
+                                    duration: '24 min',
+                                    description: 'Llegan visitantes importantes que reconocen el valor único de la aldea de Hiraku.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP6',
+                                    videoUrl: 'https://axius.seeks.cloud/#jmuy1'
+                                },
+                                {
+                                    number: 7,
+                                    title: 'El festival de la cosecha',
+                                    duration: '24 min',
+                                    description: 'La aldea celebra su primera gran cosecha con un festival especial.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP7',
+                                    videoUrl: ''
+                                },
+                                {
+                                    number: 8,
+                                    title: 'Comercio y alianzas',
+                                    duration: '24 min',
+                                    description: 'Hiraku establece relaciones comerciales con aldeas vecinas y naciones cercanas.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP8',
+                                    videoUrl: ''
+                                },
+                                {
+                                    number: 9,
+                                    title: 'Secretos del bosque',
+                                    duration: '24 min',
+                                    description: 'Los aldeanos descubren misterios ocultos en el bosque que rodea su asentamiento.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP9',
+                                    videoUrl: ''
+                                },
+                                {
+                                    number: 10,
+                                    title: 'La temporada de invierno',
+                                    duration: '24 min',
+                                    description: 'La aldea se prepara para enfrentar su primer invierno en el nuevo mundo.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP10',
+                                    videoUrl: ''
+                                },
+                                {
+                                    number: 11,
+                                    title: 'Celebración de año nuevo',
+                                    duration: '24 min',
+                                    description: 'Los aldeanos celebran el año nuevo con tradiciones únicas de su mundo.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP11',
+                                    videoUrl: ''
+                                },
+                                {
+                                    number: 12,
+                                    title: 'Un año de prosperidad',
+                                    duration: '24 min',
+                                    description: 'Hiraku reflexiona sobre todo lo logrado en su primer año en otro mundo.',
+                                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP12',
+                                    videoUrl: ''
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+    id: 'pobre-diablo',
+    title: 'Pobre Diablo',
+    year: '2023',
+    rating: '7.8',
+    genre: 'Animación, Comedia, Fantasía',
+    image: 'https://es.web.img3.acsta.net/pictures/23/01/19/11/20/0023436.jpg',
+    description: 'Stan es el Anticristo, pero no quiere destruir el mundo. Solo quiere ser feliz, encontrar su lugar y sobrevivir a su disfuncional familia infernal.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                {
+                    number: 1,
+                    title: 'El Anticristo no quiere serlo',
+                    duration: '25 min',
+                    description: 'Stan descubre que su destino es destruir la humanidad, pero él solo quiere una vida normal.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP1',
+                    videoUrl: 'https://axius.seeks.cloud/#wyed8'
+                },
+                {
+                    number: 2,
+                    title: 'Problemas familiares',
+                    duration: '25 min',
+                    description: 'La relación con sus padres se complica mientras el Infierno presiona a Stan para cumplir su destino.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP2',
+                    videoUrl: 'https://axius.seeks.cloud/#cu3je'
+                },
+                {
+                    number: 3,
+                    title: 'Amor y tentaciones',
+                    duration: '25 min',
+                    description: 'Stan experimenta el amor humano por primera vez, lo que desata el caos en el Infierno.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP3',
+                    videoUrl: 'https://axius.seeks.cloud/#x5rs6'
+                },
+                {
+                    number: 4,
+                    title: 'El Infierno moderno',
+                    duration: '25 min',
+                    description: 'Stan descubre que el Infierno también tiene problemas de gestión y crisis existencial.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP4',
+                    videoUrl: 'https://axius.seeks.cloud/#s9hoy'
+                },
+                {
+                    number: 5,
+                    title: 'Decisiones difíciles',
+                    duration: '25 min',
+                    description: 'El peso del destino se hace más fuerte y Stan debe elegir entre ser él mismo o cumplir la profecía.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP5',
+                    videoUrl: 'https://axius.seeks.cloud/#evoql'
+                },
+                {
+                    number: 6,
+                    title: 'Rebelión infernal',
+                    duration: '25 min',
+                    description: 'El Infierno entra en caos cuando algunos demonios apoyan la decisión de Stan.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP6',
+                    videoUrl: 'https://axius.seeks.cloud/#k3xaa'
+                },
+                {
+                    number: 7,
+                    title: 'El fin… ¿o no?',
+                    duration: '25 min',
+                    description: 'Todo parece conducir al apocalipsis, pero Stan aún tiene una última carta.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP7',
+                    videoUrl: 'https://axius.seeks.cloud/#bg9vn'
+                },
+                {
+                    number: 8,
+                    title: 'Pobre Diablo',
+                    duration: '25 min',
+                    description: 'Stan redefine su destino y demuestra que incluso el Anticristo puede elegir quién quiere ser.',
+                    thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=EP8',
+                    videoUrl: 'https://axius.seeks.cloud/#6ounm'
+                }
+            ]
+        }
+    ]
+},
+
+                {
+                    id: 'ben10',
+                    title: 'Ben 10 (2005)',
+                    year: '2005-2008',
+                    rating: '7.5',
+                    genre: 'Acción, Aventura, Animación',
+                    image: 'https://m.media-amazon.com/images/M/MV5BYWVjODZjNDgtYjk4ZS00OTg5LTg5NDQtZDMxZDQ4ZmM5MGJmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                    description: 'Un niño de 10 años descubre un dispositivo alienígena que le permite transformarse en 10 criaturas diferentes.',
+                    type: 'series',
+                    seasons: [
+                        {
+                            number: 1,
+                            episodes: [
+                                { number: 1, title: 'Y entonces fueron 10', duration: '22 min', description: 'Ben encuentra el Omnitrix y descubre que puede transformarse en diferentes alienígenas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E1', videoUrl: 'https://axius.seeks.cloud/#5cdjh' },
+                                { number: 2, title: 'Washington B.C.', duration: '22 min', description: 'Ben y su familia visitan Washington D.C. donde deben detener a un villano que quiere robar un diamante.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E2', videoUrl: 'https://axius.seeks.cloud/#8iz6i' },
+                                { number: 3, title: 'El krakken', duration: '22 min', description: 'Ben investiga misteriosas desapariciones en un muelle y descubre una criatura marina.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E3', videoUrl: 'https://axius.seeks.cloud/#isxot' },
+                                { number: 4, title: 'Ataque permanente', duration: '22 min', description: 'Un cazador de recompensas alienígena llamado Sixsix llega a la Tierra buscando el Omnitrix.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E4', videoUrl: 'https://axius.seeks.cloud/#1qe3d' },
+                                { number: 5, title: 'Cazafantasmas', duration: '22 min', description: 'La familia Tennyson se hospeda en un hotel embrujado donde Ben debe enfrentar fantasmas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E5', videoUrl: 'https://axius.seeks.cloud/#3t8g9' },
+                                { number: 6, title: 'La liga de las sombras', duration: '22 min', description: 'Ben se encuentra con una organización ninja y debe detener sus planes malvados.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E6', videoUrl: 'https://axius.seeks.cloud/#hakeb' },
+                                { number: 7, title: 'Kevin 11', duration: '22 min', description: 'Ben conoce a Kevin, otro chico con el Omnitrix que usa sus poderes para el mal.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E7', videoUrl: 'https://axius.seeks.cloud/#nfo5x' },
+                                { number: 8, title: 'El Alianza', duration: '22 min', description: 'Vilgax forma una alianza con otros villanos para capturar el Omnitrix.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E8', videoUrl: 'https://axius.seeks.cloud/#hakeo' },
+                                { number: 9, title: 'La última risa', duration: '22 min', description: 'Un circo llega al pueblo pero esconde un oscuro secreto que Ben debe descubrir.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E9', videoUrl: 'https://axius.seeks.cloud/#jmurq' },
+                                { number: 10, title: 'Suerte', duration: '22 min', description: 'Ben y su familia visitan Las Vegas donde se encuentran con Hex, un poderoso hechicero.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E10', videoUrl: 'https://axius.seeks.cloud/#isxoo' },
+                                { number: 11, title: 'Un pequeño problema', duration: '22 min', description: 'Ben queda atrapado en su forma de Massa Gris y debe encontrar la manera de volver a la normalidad.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E11', videoUrl: 'https://axius.seeks.cloud/#6osfz' },
+                                { number: 12, title: 'Efectos secundarios', duration: '22 min', description: 'El uso constante del Omnitrix comienza a tener efectos secundarios en Ben.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E12', videoUrl: 'https://axius.seeks.cloud/#bgtzr' },
+                                { number: 13, title: 'Secretos', duration: '22 min', description: 'Vilgax finalmente llega a la Tierra y Ben debe enfrentarlo en una batalla épica.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E13', videoUrl: 'https://axius.seeks.cloud/#k3qbo' }
+                            ]
+                        },
+                        {
+                            number: 2,
+                            episodes: [
+                                { number: 1, title: 'La gran final', duration: '22 min', description: 'Ben enfrenta las consecuencias de su batalla con Vilgax.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E1', videoUrl: 'https://axius.seeks.cloud/#s951x' },
+                                { number: 2, title: 'Benvicktor', duration: '22 min', description: 'Ben descubre una nueva transformación cuando visita un planeta alienígena.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E2', videoUrl: 'https://axius.seeks.cloud/#x5fpv' },
+                                { number: 3, title: 'Mutante Rex', duration: '22 min', description: 'Una criatura mutante escapa y Ben debe capturarla antes de que cause estragos.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E3', videoUrl: 'https://axius.seeks.cloud/#8izjf' },
+                                { number: 4, title: 'El duplicado', duration: '22 min', description: 'Ben se enfrenta a un clon malvado de sí mismo creado por un científico loco.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E4', videoUrl: 'https://axius.seeks.cloud/#5cdex' },
+                                { number: 5, title: 'Divided We Stand', duration: '22 min', description: 'El equipo se separa y Ben debe aprender a trabajar solo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E5', videoUrl: 'https://axius.seeks.cloud/#9jcqu' },
+                                { number: 6, title: 'Dont Drink the Water', duration: '22 min', description: 'Una fuente mágica de la juventud convierte a Max y Ben en niños pequeños.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E6', videoUrl: 'https://axius.seeks.cloud/#ab3z6' },
+                                { number: 7, title: 'Back With a Vengeance', duration: '22 min', description: 'Kevin regresa con nuevos poderes y sed de venganza contra Ben.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E7', videoUrl: 'https://axius.seeks.cloud/#pea8e' },
+                                { number: 8, title: 'The Galactic Enforcers', duration: '22 min', description: 'Ben conoce a un grupo de superhéroes galácticos que necesitan su ayuda.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E8', videoUrl: 'https://axius.seeks.cloud/#1qetl' },
+                                { number: 9, title: 'Camp Fear', duration: '22 min', description: 'Ben y Gwen van a un campamento de verano que resulta ser más terrorífico de lo esperado.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E9', videoUrl: 'https://axius.seeks.cloud/#hakvg' },
+                                { number: 10, title: 'Ultimate Weapon', duration: '22 min', description: 'Los villanos buscan un arma antigua que podría destruir el universo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E10', videoUrl: 'https://axius.seeks.cloud/#hakvw' },
+                                { number: 11, title: 'Tough Luck', duration: '22 min', description: 'Hex y su sobrina Charmcaster regresan para robar un amuleto de la suerte.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E11', videoUrl: 'https://axius.seeks.cloud/#jmuk8' },
+                                { number: 12, title: 'They Lurk Below', duration: '22 min', description: 'Criaturas submarinas atacan un crucero y Ben debe detenerlas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E12', videoUrl: 'https://axius.seeks.cloud/#isxww' },
+                                { number: 13, title: 'Ghostfreaked Out', duration: '22 min', description: 'Fantasmatico toma control del cuerpo de Ben con intenciones siniestras.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E13', videoUrl: 'https://axius.seeks.cloud/#6osdx' }
+                            ]
+                        },
+                        {
+                            number: 3,
+                            episodes: [
+                                { number: 1, title: 'Ben 10,000', duration: '22 min', description: 'Ben viaja al futuro y conoce a su yo adulto que se ha convertido en un héroe legendario.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E1', videoUrl: 'https://axius.seeks.cloud/#9jc5g' },
+                                { number: 2, title: 'Midnight Madness', duration: '22 min', description: 'Un villano hipnotiza a la gente durante la noche para que cometan crímenes.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E2', videoUrl: 'https://axius.seeks.cloud/#gn6tf' },
+                                { number: 3, title: 'A Change of Face', duration: '22 min', description: 'Un hechizo de Charmcaster hace que Ben y Gwen intercambien cuerpos.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E3', videoUrl: 'https://axius.seeks.cloud/#peahy' },
+                                { number: 4, title: 'Merry Christmas', duration: '22 min', description: 'En Navidad, Ben debe detener a un villano que quiere arruinar las fiestas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E4', videoUrl: 'https://axius.seeks.cloud/#8izvb' },
+                                { number: 5, title: 'Benwolf', duration: '22 min', description: 'Ben obtiene ADN de un hombre lobo alienígena y consigue una nueva transformación.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E5', videoUrl: 'https://axius.seeks.cloud/#1qeps' },
+                                { number: 6, title: 'Game Over', duration: '22 min', description: 'Ben queda atrapado dentro de un videojuego controlado por un villano.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E6', videoUrl: 'https://axius.seeks.cloud/#3t8qn' },
+                                { number: 7, title: 'Super Alien Hero Buddy Adventures', duration: '22 min', description: 'Ben protagoniza un show de TV animado y debe lidiar con la fama.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E7', videoUrl: 'https://axius.seeks.cloud/#hakr1' },
+                                { number: 8, title: 'Under Wraps', duration: '22 min', description: 'Ben descubre una momia antigua que cobra vida y causa problemas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E8', videoUrl: 'https://axius.seeks.cloud/#nfo6t' },
+                                { number: 9, title: 'The Unnaturals', duration: '22 min', description: 'Ben y su abuelo juegan béisbol contra un equipo de robots.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E9', videoUrl: 'https://axius.seeks.cloud/#jmuch' },
+                                { number: 10, title: 'Monster Weather', duration: '22 min', description: 'Un villano controla el clima y causa desastres naturales.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E10', videoUrl: 'https://axius.seeks.cloud/#isxzz' },
+                                { number: 11, title: 'The Return', duration: '22 min', description: 'El creador del Omnitrix finalmente aparece en la Tierra.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E11', videoUrl: 'https://axius.seeks.cloud/#6osi3' },
+                                { number: 12, title: 'Be Afraid of the Dark', duration: '22 min', description: 'Ben enfrenta sus mayores miedos cuando un villano los hace realidad.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E12', videoUrl: 'https://axius.seeks.cloud/#bgt3c' },
+                                { number: 13, title: 'The Visitor', duration: '22 min', description: 'Un misterioso visitante alienígena llega buscando el Omnitrix.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E13', videoUrl: 'https://axius.seeks.cloud/#k3q1q' }
+                            ]
+                        },
+                        {
+                            number: 4,
+                            episodes: [
+                                { number: 1, title: 'Perfect Day', duration: '22 min', description: 'Ben vive lo que parece ser el día perfecto, pero algo no está bien.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E1', videoUrl: '' },
+                                { number: 2, title: 'Divided We Stand', duration: '22 min', description: 'El equipo debe reunirse para enfrentar una amenaza mayor.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E2', videoUrl: '' },
+                                { number: 3, title: 'Dont Drink the Water', duration: '22 min', description: 'Max y Ben deben revertir los efectos de la fuente de la juventud.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E3', videoUrl: '' },
+                                { number: 4, title: 'Big Fat Alien Wedding', duration: '22 min', description: 'Ben asiste a la boda de dos alienígenas y debe evitar que sea saboteada.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E4', videoUrl: '' },
+                                { number: 5, title: 'Ben 4 Good Buddy', duration: '22 min', description: 'Ben y Max tienen aventuras en la carretera con camioneros.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E5', videoUrl: '' },
+                                { number: 6, title: 'Ready to Rumble', duration: '22 min', description: 'Ben participa en un evento de lucha libre profesional.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E6', videoUrl: '' },
+                                { number: 7, title: 'Ken 10', duration: '22 min', description: 'El hijo de Ben del futuro viaja al presente pidiendo ayuda.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E7', videoUrl: '' },
+                                { number: 8, title: 'Ben 10 vs. Negative 10 Parte 1', duration: '22 min', description: 'Diez villanos se unen para derrotar a Ben de una vez por todas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E8', videoUrl: '' },
+                                { number: 9, title: 'Ben 10 vs. Negative 10 Parte 2', duration: '22 min', description: 'La batalla épica final contra los Negative 10.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E9', videoUrl: '' },
+                                { number: 10, title: 'El Secreto del Omnitrix', duration: '44 min', description: 'Película especial que revela los secretos del Omnitrix y cierra la serie original.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E10', videoUrl: '' }
+                            ]
+                        }
+                    ]
+                },
+                {
+    id: 'solo-leveling',
+    title: 'Solo Leveling',
+    year: '2024',
+    rating: '8.9',
+    genre: 'Acción, Fantasía, Anime',
+    image: 'https://cdn.shopify.com/s/files/1/0244/1337/2468/files/jbalvin-solo-leveling-cover_1024x1024.jpg?v=1738767289',
+    description: 'En un mundo donde cazadores luchan contra monstruos, Sung Jin-Woo, el más débil de todos, obtiene un poder único que le permite subir de nivel sin límites.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                { number: 1, title: 'Estoy acostumbrado a ser débil', duration: '23 min', description: 'Sung Jin-Woo, un cazador de rango E, entra a una mazmorra que cambiará su destino para siempre.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E1', videoUrl: 'https://axius.seeks.cloud/#3t5b3' },
+                { number: 2, title: 'Si tuviera otra oportunidad', duration: '23 min', description: 'Jin-Woo despierta con un misterioso sistema que solo él puede ver.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E2', videoUrl: 'https://axius.seeks.cloud/#1qnkv' },
+                { number: 3, title: 'Un juego como la vida real', duration: '23 min', description: 'El sistema obliga a Jin-Woo a completar misiones mortales para sobrevivir.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E3', videoUrl: 'https://axius.seeks.cloud/#isl6l' },
+                { number: 4, title: 'Subiendo de nivel', duration: '23 min', description: 'Jin-Woo comienza a notar cambios drásticos en su fuerza y habilidades.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E4', videoUrl: 'https://axius.seeks.cloud/#5ck9x' },
+                { number: 5, title: 'Una buena oportunidad', duration: '23 min', description: 'Jin-Woo entra a una mazmorra especial para ganar más poder y experiencia.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E5', videoUrl: 'https://axius.seeks.cloud/#vzw8g' },
+                { number: 6, title: 'El verdadero cazador', duration: '23 min', description: 'Jin-Woo demuestra que ya no es el cazador más débil del mundo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E6', videoUrl: 'https://axius.seeks.cloud/#t6cg5' },
+                { number: 7, title: 'La decisión', duration: '23 min', description: 'Jin-Woo acepta un peligroso trabajo que podría cambiar su futuro.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E7', videoUrl: 'https://axius.seeks.cloud/#pe61s' },
+                { number: 8, title: 'Mazmorra roja', duration: '23 min', description: 'Una misión aparentemente sencilla se convierte en una trampa mortal.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E8', videoUrl: 'https://axius.seeks.cloud/#gnjzt' },
+                { number: 9, title: 'El rey de los lobos', duration: '23 min', description: 'Jin-Woo se enfrenta a un poderoso jefe que pone a prueba sus límites.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E9', videoUrl: 'https://axius.seeks.cloud/#m1gra' },
+                { number: 10, title: 'Una habilidad aterradora', duration: '23 min', description: 'Jin-Woo obtiene un poder oscuro que cambia la forma de pelear.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E10', videoUrl: 'https://axius.seeks.cloud/#9jawk' },
+                { number: 11, title: 'Ejército de sombras', duration: '23 min', description: 'El verdadero potencial de Jin-Woo comienza a revelarse.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E11', videoUrl: 'https://axius.seeks.cloud/#lh8un' },
+                { number: 12, title: 'El nuevo rango', duration: '23 min', description: 'El mundo de los cazadores empieza a notar la existencia de Jin-Woo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E12', videoUrl: 'https://axius.seeks.cloud/#uptmd' }
+            ]
+        },
+        {
+            number: 2,
+            episodes: [
+                { number: 1, title: 'El cazador desconocido', duration: '23 min', description: 'Jin-Woo regresa más fuerte que nunca y despierta sospechas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E1', videoUrl: '' },
+                { number: 2, title: 'Prueba de rango', duration: '23 min', description: 'Jin-Woo se somete a una evaluación oficial que impacta a todos.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E2', videoUrl: '' },
+                { number: 3, title: 'Cazador de rango S', duration: '23 min', description: 'Las grandes asociaciones comienzan a interesarse en Jin-Woo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E3', videoUrl: '' },
+                { number: 4, title: 'La isla Jeju', duration: '23 min', description: 'Se prepara una peligrosa incursión contra una amenaza nacional.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E4', videoUrl: '' },
+                { number: 5, title: 'El rey hormiga', duration: '23 min', description: 'Un enemigo aterrador aparece, superando a los cazadores más fuertes.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E5', videoUrl: '' },
+                { number: 6, title: 'El poder del monarca', duration: '23 min', description: 'Jin-Woo revela su verdadera fuerza frente al mundo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E6', videoUrl: '' },
+                { number: 7, title: 'Sombras contra el mundo', duration: '23 min', description: 'El equilibrio entre humanos y monstruos comienza a romperse.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E7', videoUrl: '' },
+                { number: 8, title: 'El Monarca de las Sombras', duration: '23 min', description: 'Jin-Woo acepta su destino y se convierte en una leyenda.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E8', videoUrl: '' }
+            ]
+        }
+    ]
+},
+
+                {
+    id: 'slugterra',
+    title: 'Bajoterra (Slugterra)',
+    year: '2012-2016',
+    rating: '7.4',
+    genre: 'Acción, Aventura, Animación',
+    image: 'https://i.pinimg.com/474x/42/60/01/426001ab629606ca95633a821ee8b61f.jpg',
+    description: 'Eli Shane es un joven de 15 años decidido a convertirse en el mejor lanzador de babosas del mundo subterráneo conocido como Bajoterra, siguiendo los pasos de su legendario padre Will Shane.',
+    type: 'series',
+    seasons: [
+        {
+            number: 1,
+            episodes: [
+                { number: 1, title: 'El mundo bajo nuestros pies (Parte 1)', duration: '22 min', description: 'Eli Shane llega a Bajoterra para convertirse en el mejor lanzador y descubre los secretos de su padre.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E1', videoUrl: 'https://axius.seeks.cloud/#upczc' },
+                { number: 2, title: 'El mundo bajo nuestros pies (Parte 2)', duration: '22 min', description: 'Eli forma su equipo y se enfrenta a su primer gran desafío contra las fuerzas oscuras.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E2', videoUrl: 'https://axius.seeks.cloud/#k3rgm' },
+                { number: 3, title: 'La guarida', duration: '22 min', description: 'Eli y su pandilla encuentran una base secreta que perteneció a su padre.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E3', videoUrl: 'https://axius.seeks.cloud/#6otdd' },
+                { number: 4, title: 'El comerciante', duration: '22 min', description: 'El equipo debe recuperar babosas robadas de un comerciante corrupto.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E4', videoUrl: 'https://axius.seeks.cloud/#halvm' },
+                { number: 5, title: 'El duelo', duration: '22 min', description: 'Eli acepta un duelo formal para defender su honor y el de su equipo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E5', videoUrl: 'https://axius.seeks.cloud/#ow6ld' },
+                { number: 6, title: 'El retorno de los elementales', duration: '22 min', description: 'Babosas elementales antiguas comienzan a despertar en Bajoterra.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E6', videoUrl: '' },
+                { number: 7, title: 'Revuelta en el mercado', duration: '22 min', description: 'Una revuelta amenaza con destruir el mercado principal de Bajoterra.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E7', videoUrl: '' },
+                { number: 8, title: 'La trampa de Blakk', duration: '22 min', description: 'Dr. Blakk tiende una trampa elaborada para capturar a Eli y sus babosas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E8', videoUrl: '' },
+                { number: 9, title: 'Transformación', duration: '22 min', description: 'Eli descubre el secreto de la transformación de las babosas a velocidad 100.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E9', videoUrl: '' },
+                { number: 10, title: 'La Caverna de Robahumo', duration: '22 min', description: 'El equipo explora una caverna misteriosa llena de peligros.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E10', videoUrl: '' },
+                { number: 11, title: 'Mario Bravado', duration: '22 min', description: 'Un famoso cazador de recompensas llega a Bajoterra buscando a Eli.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E11', videoUrl: '' },
+                { number: 12, title: 'Deadweed', duration: '22 min', description: 'Una planta mortal amenaza con consumir toda Bajoterra.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E12', videoUrl: '' },
+                { number: 13, title: 'Shadows and Light', duration: '22 min', description: 'Eli debe elegir entre la luz y la oscuridad cuando descubre un poder antiguo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E13', videoUrl: '' },
+                { number: 14, title: 'Upgrade', duration: '22 min', description: 'El equipo mejora su equipo y armas para enfrentar amenazas mayores.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E14', videoUrl: '' },
+                { number: 15, title: 'Mecha Mutiny', duration: '22 min', description: 'Robots mecánicos se rebelan contra sus creadores.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E15', videoUrl: '' },
+                { number: 16, title: 'Return of the Shane Gang', duration: '22 min', description: 'La pandilla Shane se reúne para una misión peligrosa.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E16', videoUrl: '' },
+                { number: 17, title: 'Bandoleer of Brothers', duration: '22 min', description: 'Eli aprende sobre la hermandad entre lanzadores.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E17', videoUrl: '' },
+                { number: 18, title: 'Dark as Night', duration: '22 min', description: 'Las babosas oscuras comienzan a aparecer en mayor número.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E18', videoUrl: '' },
+                { number: 19, title: 'Light as Day', duration: '22 min', description: 'Eli busca babosas de luz para contrarrestar la oscuridad.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E19', videoUrl: '' },
+                { number: 20, title: 'It Comes by Night', duration: '22 min', description: 'Una criatura nocturna aterroriza las cavernas de Bajoterra.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E20', videoUrl: '' },
+                { number: 21, title: 'Upgrade', duration: '22 min', description: 'Más mejoras llegan al arsenal del equipo Shane.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E21', videoUrl: '' },
+                { number: 22, title: 'Back to Blakk', duration: '22 min', description: 'Confrontación directa con el Dr. Blakk.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E22', videoUrl: '' },
+                { number: 23, title: 'Roboslugs', duration: '22 min', description: 'Blakk crea babosas robóticas para dominar Bajoterra.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E23', videoUrl: '' },
+                { number: 24, title: 'The Unbeatable Master', duration: '22 min', description: 'Eli se enfrenta a un maestro lanzador legendario.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E24', videoUrl: '' },
+                { number: 25, title: 'Deep Water, Dark Water', duration: '22 min', description: 'Una caverna inundada esconde secretos antiguos.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E25', videoUrl: '' },
+                { number: 26, title: 'The New Boss', duration: '22 min', description: 'Un nuevo villano emerge como líder de las fuerzas oscuras.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E26', videoUrl: '' },
+                { number: 27, title: 'Undertow', duration: '22 min', description: 'Corrientes subterráneas peligrosas amenazan a la pandilla.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E27', videoUrl: '' },
+                { number: 28, title: 'Endangered Species', duration: '22 min', description: 'Babosas raras están en peligro de extinción.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E28', videoUrl: '' },
+                { number: 29, title: 'Stuff of Legend', duration: '22 min', description: 'Eli descubre leyendas sobre su padre que creía imposibles.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E29', videoUrl: '' },
+                { number: 30, title: 'Eastern Caverns', duration: '22 min', description: 'El equipo viaja a las misteriosas Cavernas del Este.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E30', videoUrl: '' },
+                { number: 31, title: 'The Hard Part', duration: '22 min', description: 'Eli toma la decisión más difícil de su vida.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E31', videoUrl: '' },
+                { number: 32, title: 'What Lies Beneath', duration: '22 min', description: 'Secretos enterrados bajo Bajoterra salen a la luz.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E32', videoUrl: '' },
+                { number: 33, title: 'The Return', duration: '22 min', description: 'Will Shane podría estar vivo, y Eli va en su búsqueda.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E33', videoUrl: '' },
+                { number: 34, title: 'Slugterra: Ghoul from Beyond', duration: '44 min', description: 'Película especial: Una amenaza espectral llega desde más allá.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E34', videoUrl: '' },
+                { number: 35, title: 'The Journey Home', duration: '22 min', description: 'Eli intenta encontrar el camino de regreso a casa.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T1E35', videoUrl: '' }
+            ]
+        },
+        {
+            number: 2,
+            episodes: [
+                { number: 1, title: 'The Trade', duration: '22 min', description: 'Eli debe hacer un intercambio peligroso para salvar a un amigo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E1', videoUrl: '' },
+                { number: 2, title: 'Get Pronto', duration: '22 min', description: 'Pronto es capturado y el equipo debe rescatarlo.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E2', videoUrl: '' },
+                { number: 3, title: 'Fortuna', duration: '22 min', description: 'Una caverna de la fortuna promete riquezas pero esconde trampas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E3', videoUrl: '' },
+                { number: 4, title: 'The Fall of the Eastern Champion', duration: '22 min', description: 'El campeón del Este cae en desgracia.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E4', videoUrl: '' },
+                { number: 5, title: 'The Lady and the Sword', duration: '22 min', description: 'Una guerrera legendaria porta una espada mística.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E5', videoUrl: '' },
+                { number: 6, title: 'The Emperor', duration: '22 min', description: 'El Emperador de las Cavernas del Este tiene planes siniestros.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E6', videoUrl: '' },
+                { number: 7, title: 'Trouble with Burpy', duration: '22 min', description: 'Burpy, la babosa de Eli, actúa de manera extraña.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E7', videoUrl: '' },
+                { number: 8, title: 'Kinjus Journey', duration: '22 min', description: 'Kinjus emprende un viaje personal de descubrimiento.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E8', videoUrl: '' },
+                { number: 9, title: 'The Distant Cousin', duration: '22 min', description: 'Un pariente lejano de Eli aparece con intenciones ocultas.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E9', videoUrl: '' },
+                { number: 10, title: 'Keys to the Kingdom', duration: '22 min', description: 'Llaves antiguas pueden abrir el reino prohibido.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E10', videoUrl: '' },
+                { number: 11, title: 'The Hard Part Part 2', duration: '22 min', description: 'Continúan las difíciles decisiones de Eli.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E11', videoUrl: '' },
+                { number: 12, title: 'Slug Day', duration: '22 min', description: 'Se celebra el día de las babosas en Bajoterra.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E12', videoUrl: '' },
+                { number: 13, title: 'The Fall of Sedo', duration: '22 min', description: 'La ciudad de Sedo está bajo ataque.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T2E13', videoUrl: '' }
+            ]
+        },
+        {
+            number: 3,
+            episodes: [
+                { number: 1, title: 'Return of the Elementals Part 1', duration: '44 min', description: 'Los elementales regresan con poder renovado.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E1', videoUrl: '' },
+                { number: 2, title: 'Return of the Elementals Part 2', duration: '44 min', description: 'La batalla final contra los elementales.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E2', videoUrl: '' },
+                { number: 3, title: 'Slugterra: Into the Shadows', duration: '44 min', description: 'Película especial: Eli se adentra en el reino de las sombras.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T3E3', videoUrl: '' }
+            ]
+        },
+        {
+            number: 4,
+            episodes: [
+                { number: 1, title: 'Slugterra: Slug Fu Showdown', duration: '44 min', description: 'Película especial: Torneo de Slug Fu con los mejores lanzadores.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E1', videoUrl: '' },
+                { number: 2, title: 'The Emperor Strikes Back', duration: '22 min', description: 'El Emperador regresa con un ejército más poderoso.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E2', videoUrl: '' },
+                { number: 3, title: 'The Return of the Eastern Champion', duration: '22 min', description: 'El campeón del Este busca redención.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E3', videoUrl: '' },
+                { number: 4, title: 'The Final Battle', duration: '44 min', description: 'La batalla definitiva por el futuro de Bajoterra.', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=T4E4', videoUrl: '' }
+            ]
+        }
+    ]
+}
+            ]
+        };
+        
+
+       let currentContent = null;
+let currentSeason = 1;
+let progressTracker = null;
+let currentProgress = 5;
+
+// WATCHING PROGRESS STORAGE
+function saveWatchingProgress(contentId, progress, episodeData = null) {
+    try {
+        const watchingData = {
+            contentId: contentId,
+            progress: progress,
+            timestamp: Date.now(),
+            episodeData: episodeData
+        };
+        localStorage.setItem(`watching_${contentId}`, JSON.stringify(watchingData));
+        console.log('✅ Progreso guardado:', contentId, progress + '%');
+        updateContinueWatching();
+    } catch (e) {
+        console.error('Error saving progress:', e);
+    }
+}
+
+function getWatchingProgress(contentId) {
+    try {
+        const data = localStorage.getItem(`watching_${contentId}`);
+        return data ? JSON.parse(data) : null;
+    } catch (e) {
+        console.error('Error getting progress:', e);
+        return null;
+    }
+}
+
+function getAllWatchingProgress() {
+    const watching = [];
+    try {
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith('watching_')) {
+                const data = JSON.parse(localStorage.getItem(key));
+                watching.push(data);
+            }
+        }
+    } catch (e) {
+        console.error('Error reading progress:', e);
+    }
+    return watching.sort((a, b) => b.timestamp - a.timestamp);
+}
+
+function updateContinueWatching() {
+    const watchingList = getAllWatchingProgress();
+    const section = document.getElementById('continueWatchingSection');
+    const grid = document.getElementById('continueWatchingGrid');
+
+    if (!section || !grid) {
+        console.warn('⚠️ Elementos de continuar viendo no encontrados');
+        return;
+    }
+
+    if (watchingList.length === 0) {
+        section.classList.remove('active');
+        console.log('📭 No hay contenido para continuar viendo');
+        return;
+    }
+
+    console.log('📺 Actualizando continuar viendo con', watchingList.length, 'items');
+    section.classList.add('active');
+    
+    const allContent = [
+        ...contentDatabase.movies, 
+        ...contentDatabase.series, 
+        ...contentDatabase.anime, 
+        ...contentDatabase.animepeli
+    ];
+    
+    grid.innerHTML = watchingList.map(watching => {
+        const content = allContent.find(c => c.id === watching.contentId);
+        if (!content) return '';
+
+        let title = content.title;
+        if (watching.episodeData) {
+            title += ` - T${watching.episodeData.season}:E${watching.episodeData.episode}`;
+        }
+
+        const contentEscaped = JSON.stringify(content)
+            .replace(/\\/g, '\\\\')
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '&quot;');
+        
+        const watchingEscaped = JSON.stringify(watching)
+            .replace(/\\/g, '\\\\')
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '&quot;');
+
+        return `
+            <div class="content-card" onclick="resumeContent(JSON.parse('${contentEscaped}'), JSON.parse('${watchingEscaped}'))">
+                <img src="${content.image}" alt="${content.title}" loading="lazy">
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: ${watching.progress}%"></div>
+                </div>
+                <div class="content-overlay">
+                    <div class="content-title">${title}</div>
+                    <div class="content-meta">
+                        <span>${content.year}</span>
+                        <span class="rating">⭐ ${content.rating}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    setTimeout(() => {
+        updateArrowVisibility('continueWatchingGrid');
+    }, 100);
+}
+
+function resumeContent(content, watchingData) {
+    console.log('▶️ Resumiendo:', content.title);
+    if (content.type === 'movie' || content.type === 'animepeli') {
+        openContent(content);
+    } else {
+        openContent(content);
+        if (watchingData && watchingData.episodeData) {
+            changeSeason(watchingData.episodeData.season);
+            setTimeout(() => {
+                const season = content.seasons[watchingData.episodeData.season - 1];
+                if (season) {
+                    const episode = season.episodes[watchingData.episodeData.episode - 1];
+                    if (episode) {
+                        playEpisode(episode);
+                    }
+                }
+            }, 100);
+        }
+    }
+}
+
+// TRACK VIDEO PROGRESS - VERSIÓN MEJORADA
+function startTrackingProgress() {
+    if (progressTracker) {
+        clearInterval(progressTracker);
+    }
+
+    // Guardar inmediatamente al empezar
+    currentProgress = 5;
+    
+    if (currentContent) {
+        let episodeData = null;
+        if (currentContent.type === 'series' || currentContent.type === 'anime') {
+            const currentEpisode = getCurrentEpisode();
+            if (currentEpisode) {
+                episodeData = {
+                    season: currentSeason,
+                    episode: currentEpisode.number
+                };
+            }
+        }
+        saveWatchingProgress(currentContent.id, currentProgress, episodeData);
+    }
+
+    // Actualizar progreso cada 10 segundos
+    progressTracker = setInterval(() => {
+        const iframe = document.getElementById('videoIframe');
+        if (iframe && iframe.src && currentContent) {
+            // Incrementar progreso gradualmente
+            currentProgress = Math.min(currentProgress + 5, 95);
+            
+            let episodeData = null;
+            if (currentContent.type === 'series' || currentContent.type === 'anime') {
+                const currentEpisode = getCurrentEpisode();
+                if (currentEpisode) {
+                    episodeData = {
+                        season: currentSeason,
+                        episode: currentEpisode.number
+                    };
+                }
+            }
+
+            saveWatchingProgress(currentContent.id, currentProgress, episodeData);
+        }
+    }, 10000); // Guardar cada 10 segundos
+}
+
+function stopTrackingProgress() {
+    if (progressTracker) {
+        clearInterval(progressTracker);
+        progressTracker = null;
+    }
+    currentProgress = 5;
+    console.log('⏹️ Tracking detenido');
+}
+
+function getCurrentEpisode() {
+    if (!currentContent || (currentContent.type !== 'series' && currentContent.type !== 'anime')) {
+        return null;
+    }
+    
+    const iframe = document.getElementById('videoIframe');
+    if (!iframe || !iframe.src) return null;
+
+    const season = currentContent.seasons?.find(s => s.number === currentSeason);
+    if (!season) return null;
+
+    return season.episodes.find(ep => ep.videoUrl === iframe.src);
+}
+
+// PLAY AVATAR FROM HERO BANNER
+function playAvatarHero() {
+    const avatarMovie = {
+        id: 'avatar',
+        title: 'Avatar Juego y Ceniza',
+        year: '2025',
+        rating: '8.9',
+        genre: 'Aventura, Fantasía',
+        image: 'https://www.sensacine.com/peliculas/pelicula-187247/',
+        description: 'Continúa la saga de James Cameron, con Jake Sully y Neytiri enfrentando al Pueblo de la Ceniza, un clan Navi volcánico y agresivo liderado por Varang.',
+        type: 'movie',
+        videoUrl: 'https://axius.seeks.cloud/#jmufy'
+    };
+    openContent(avatarMovie);
+}
+
+// LOGIN SYSTEM
+function login() {
+    const userName = document.getElementById('userName').value.trim();
+    const accessCode = document.getElementById('accessCode').value;
+    const errorMessage = document.getElementById('errorMessage');
+
+    if (!userName) {
+        errorMessage.textContent = 'Por favor ingresa tu nombre';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    if (accessCode !== '9272917') {
+        errorMessage.textContent = 'Código incorrecto';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    localStorage.setItem('axiusUser', userName);
+    localStorage.setItem('axiusAuth', 'true');
+    
+    document.getElementById('displayName').textContent = userName;
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'block';
+    
+    initializeApp();
+}
+
+function logout() {
+    localStorage.removeItem('axiusUser');
+    localStorage.removeItem('axiusAuth');
+    location.reload();
+}
+
+function checkAuth() {
+    const isAuth = localStorage.getItem('axiusAuth');
+    const userName = localStorage.getItem('axiusUser');
+
+    if (isAuth === 'true' && userName) {
+        document.getElementById('displayName').textContent = userName;
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'block';
+        initializeApp();
+    }
+}
+
+// INITIALIZE APP
+function initializeApp() {
+    console.log('🚀 Inicializando aplicación...');
+    renderContent('moviesGrid', contentDatabase.movies);
+    renderContent('seriesGrid', contentDatabase.series);
+    renderContent('animeGrid', contentDatabase.anime);
+    renderContent('animepeli', contentDatabase.animepeli);
+    updateContinueWatching();
+    
+    // Add navigation arrows after content is rendered
+    setTimeout(() => {
+        addNavigationArrows();
+    }, 100);
+}
+
+// RENDER CONTENT
+function renderContent(gridId, items) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    
+    grid.innerHTML = items.map(item => {
+        const itemEscaped = JSON.stringify(item)
+            .replace(/\\/g, '\\\\')
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '&quot;');
+        
+        return `
+            <div class="content-card" onclick="openContent(JSON.parse('${itemEscaped}'))">
+                <img src="${item.image}" alt="${item.title}" loading="lazy">
+                <div class="content-overlay">
+                    <div class="content-title">${item.title}</div>
+                    <div class="content-meta">
+                        <span>${item.year}</span>
+                        <span class="rating">⭐ ${item.rating}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// SEARCH FUNCTIONALITY
+function search() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const searchGrid = document.getElementById('searchGrid');
+    const searchResults = document.getElementById('searchResults');
+    const noResults = document.getElementById('noResults');
+    const homeSection = document.getElementById('homeSection');
+
+    if (query === '') {
+        searchResults.classList.add('hidden');
+        homeSection.style.display = 'block';
+        return;
+    }
+
+    const allContent = [
+        ...contentDatabase.movies, 
+        ...contentDatabase.series, 
+        ...contentDatabase.anime, 
+        ...contentDatabase.animepeli
+    ];
+    
+    const results = allContent.filter(item => 
+        item.title.toLowerCase().includes(query) ||
+        item.genre.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query)
+    );
+
+    homeSection.style.display = 'none';
+    searchResults.classList.remove('hidden');
+
+    if (results.length === 0) {
+        searchGrid.innerHTML = '';
+        noResults.classList.remove('hidden');
+    } else {
+        noResults.classList.add('hidden');
+        searchGrid.innerHTML = results.map(item => {
+            const itemEscaped = JSON.stringify(item)
+                .replace(/\\/g, '\\\\')
+                .replace(/'/g, "\\'")
+                .replace(/"/g, '&quot;');
+            
+            return `
+                <div class="content-card" onclick="openContent(JSON.parse('${itemEscaped}'))">
+                    <img src="${item.image}" alt="${item.title}" loading="lazy">
+                    <div class="content-overlay">
+                        <div class="content-title">${item.title}</div>
+                        <div class="content-meta">
+                            <span>${item.year}</span>
+                            <span class="rating">⭐ ${item.rating}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+}
+
+// OPEN CONTENT IN MODAL
+function openContent(item) {
+    console.log('🎬 Abriendo:', item.title);
+    currentContent = item;
+    currentSeason = 1;
+
+    const modal = document.getElementById('playerModal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    document.getElementById('modalTitle').textContent = item.title;
+    document.getElementById('modalDescription').textContent = item.description;
+    document.getElementById('modalYear').textContent = item.year;
+    document.getElementById('modalRating').textContent = `⭐ ${item.rating}`;
+    document.getElementById('modalGenre').textContent = item.genre;
+
+    if (item.type === 'movie' || item.type === 'animepeli') {
+        document.getElementById('videoIframe').src = item.videoUrl;
+        document.getElementById('modalEpisodes').innerHTML = '';
+        
+        // GUARDAR INMEDIATAMENTE
+        saveWatchingProgress(item.id, 5, null);
+        startTrackingProgress();
+    } else {
+        showSeries(item);
+    }
+}
+
+// CLOSE PLAYER MODAL
+function closePlayer() {
+    console.log('❌ Cerrando player');
+    const modal = document.getElementById('playerModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    document.getElementById('videoIframe').src = '';
+    stopTrackingProgress();
+    
+    // Actualizar continuar viendo al cerrar
+    updateContinueWatching();
+}
+
+// SHOW SERIES IN MODAL
+function showSeries(item) {
+    const episodesSection = document.getElementById('modalEpisodes');
+    
+    // Season Selector
+    const seasonButtons = item.seasons.map(season => `
+        <button class="season-btn ${season.number === currentSeason ? 'active' : ''}" 
+                onclick="changeSeason(${season.number})">
+            Temporada ${season.number}
+        </button>
+    `).join('');
+
+    const currentSeasonData = item.seasons.find(s => s.number === currentSeason);
+    const episodesHTML = currentSeasonData.episodes.map(ep => {
+        const epEscaped = JSON.stringify(ep)
+            .replace(/\\/g, '\\\\')
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '&quot;');
+        
+        return `
+            <div class="episode-card" onclick="playEpisode(JSON.parse('${epEscaped}'))">
+                <div class="episode-thumbnail">
+                    EP ${ep.number}
+                    <div class="play-overlay">
+                        <div class="play-icon-ep">▶</div>
+                    </div>
+                </div>
+                <div class="episode-info-detail">
+                    <div class="episode-number-title">
+                        <div class="episode-number">${ep.number}. ${ep.title}</div>
+                        <div class="episode-duration">${ep.duration}</div>
+                    </div>
+                    <div class="episode-desc">${ep.description}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    episodesSection.innerHTML = `
+        <div class="episodes-header">
+            <h2 class="episodes-title">Episodios</h2>
+            <div class="season-selector">${seasonButtons}</div>
+        </div>
+        <div class="episodes-grid">${episodesHTML}</div>
+    `;
+
+    // Play first episode
+    playEpisode(currentSeasonData.episodes[0]);
+}
+
+// CHANGE SEASON
+function changeSeason(seasonNumber) {
+    console.log('📺 Cambiando a temporada', seasonNumber);
+    currentSeason = seasonNumber;
+    showSeries(currentContent);
+}
+
+// PLAY EPISODE
+function playEpisode(episode) {
+    console.log('▶️ Reproduciendo episodio', episode.number);
+    const iframe = document.getElementById('videoIframe');
+
+    iframe.src = '';
+    iframe.removeAttribute('src');
+
+    setTimeout(() => {
+        iframe.src = episode.videoUrl;
+        
+        // GUARDAR INMEDIATAMENTE al reproducir episodio
+        if (currentContent && (currentContent.type === 'series' || currentContent.type === 'anime')) {
+            const episodeData = {
+                season: currentSeason,
+                episode: episode.number
+            };
+            saveWatchingProgress(currentContent.id, 5, episodeData);
+        }
+        
+        startTrackingProgress();
+    }, 50);
+}
+
+// SHOW SECTION
+function showSection(section) {
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    closePlayer();
+    
+    const moviesSection = document.getElementById('moviesGrid').parentElement.parentElement;
+    const seriesSection = document.getElementById('seriesGrid').parentElement.parentElement;
+    const animeSection = document.getElementById('animeGrid').parentElement.parentElement;
+    const animepeliSection = document.getElementById('animepeli').parentElement.parentElement;
+    
+    if (section === 'movies') {
+        moviesSection.style.display = 'block';
+        seriesSection.style.display = 'none';
+        animeSection.style.display = 'none';
+        animepeliSection.style.display = 'none';
+    } else if (section === 'series') {
+        moviesSection.style.display = 'none';
+        seriesSection.style.display = 'block';
+        animeSection.style.display = 'none';
+        animepeliSection.style.display = 'none';
+    } else {
+        moviesSection.style.display = 'block';
+        seriesSection.style.display = 'block';
+        animeSection.style.display = 'block';
+        animepeliSection.style.display = 'block';
+    }
+}
+
+// NAVIGATION ARROWS FUNCTIONALITY
+function addNavigationArrows() {
+    const sections = ['moviesGrid', 'seriesGrid', 'animeGrid', 'animepeli', 'continueWatchingGrid'];
+    
+    sections.forEach(gridId => {
+        const grid = document.getElementById(gridId);
+        if (!grid) return;
+        
+        const contentRow = grid.parentElement;
+        
+        // Check if arrows already exist
+        if (contentRow.querySelector('.nav-arrow')) return;
+        
+        // Create arrows
+        const leftArrow = document.createElement('button');
+        leftArrow.className = 'nav-arrow left';
+        leftArrow.innerHTML = '‹';
+        leftArrow.onclick = () => scrollContent(gridId, 'left');
+        
+        const rightArrow = document.createElement('button');
+        rightArrow.className = 'nav-arrow right';
+        rightArrow.innerHTML = '›';
+        rightArrow.onclick = () => scrollContent(gridId, 'right');
+        
+        contentRow.appendChild(leftArrow);
+        contentRow.appendChild(rightArrow);
+        
+        // Update arrow visibility on scroll
+        grid.addEventListener('scroll', () => updateArrowVisibility(gridId));
+        updateArrowVisibility(gridId);
+    });
+}
+
+function scrollContent(gridId, direction) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    
+    const scrollAmount = grid.offsetWidth * 0.8;
+    
+    grid.classList.add('scrolling');
+    
+    if (direction === 'left') {
+        grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+        grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+    
+    setTimeout(() => grid.classList.remove('scrolling'), 300);
+}
+
+function updateArrowVisibility(gridId) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    
+    const contentRow = grid.parentElement;
+    const leftArrow = contentRow.querySelector('.nav-arrow.left');
+    const rightArrow = contentRow.querySelector('.nav-arrow.right');
+    
+    if (!leftArrow || !rightArrow) return;
+    
+    // Check if at the start
+    if (grid.scrollLeft <= 10) {
+        leftArrow.disabled = true;
+    } else {
+        leftArrow.disabled = false;
+    }
+    
+    // Check if at the end
+    if (grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 10) {
+        rightArrow.disabled = true;
+    } else {
+        rightArrow.disabled = false;
+    }
+}
+
+// FUNCIÓN DE PRUEBA - Para agregar datos de ejemplo
+function addTestData() {
+    console.log('🧪 Agregando datos de prueba...');
+    
+    // Ben 10
+    saveWatchingProgress('ben-10', 45, {
+        season: 1,
+        episode: 5
+    });
+    
+    // Slugterra  
+    saveWatchingProgress('slugterra', 60, {
+        season: 1,
+        episode: 8
+    });
+    
+    // Toy Story
+    saveWatchingProgress('toy-story', 35, null);
+    
+    console.log('✅ Datos de prueba agregados. Total items:', getAllWatchingProgress().length);
+}
+
+// CHECK AUTH ON LOAD
+checkAuth();
+
+// Header scroll effect
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (header) {
+        if (window.scrollY > 0) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+});
+
+// Inicializar al cargar
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✨ DOM cargado');
+    const isAuth = localStorage.getItem('axiusAuth');
+    if (isAuth === 'true') {
+        updateContinueWatching();
+    }
+});
+</script>
+</body>
+</html>
