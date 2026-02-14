@@ -1103,6 +1103,7 @@
                     <a class="active" onclick="showSection('home')">Inicio</a>
                     <a onclick="showSection('movies')">Películas</a>
                     <a onclick="showSection('series')">Series</a>
+                    <a onclick="showSection('Deportes')">Deportes</a>
                 </nav>
             </div>
             <div class="header-right">
@@ -1182,6 +1183,14 @@
                 <h2 class="section-title">Peliculas Animadas</h2>
                 <div class="content-row">
                     <div class="content-slider" id="animepeli"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Deportes -->
+            <div class="content-section">
+                <h2 class="section-title">Deportes</h2>
+                <div class="content-row">
+                    <div class="content-slider" id="Deportes"></div>
                 </div>
             </div>
         </div>
@@ -1503,6 +1512,61 @@
                     type: 'movie',
                     videoUrl: 'https://axius.seeks.cloud/#jmb1m'
                 },
+                       {
+                    id: 'spermageddon',
+                    title: 'Spermageddon',
+                    year: '2024',
+                    rating: '7.5',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/jYJJDtrGBAr1U9WBVuq809FyYQj.jpg',
+                    description: 'Película Spermageddon',
+                    type: 'movie',
+                    videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2k0am1lZ3ZRaU91ZlZRa1I1YVh5RnJnV2pBdnpfOXJRQmprRl9OZEJ6QVpWNDJWZml6QmduZ3dfZ0pUa2QyTzJrWEdiY2taakdXMmhfdkxvb3BuOE1zLQ=='
+                },
+                {
+                    id: 'el-rey-de-reyes',
+                    title: 'El Rey de Reyes',
+                    year: '2024',
+                    rating: '7.5',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/yhN5fRdZogzoqwDqHGHHvkoNVP4.jpg',
+                    description: 'Película El Rey de Reyes',
+                    type: 'movie',
+                    videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly92aW1lb3MubmV0L2VtYmVkLXpyaGRsMDMzNXh4aS5odG1s'
+                },
+                {
+                    id: 'dalia-y-el-libro-rojo',
+                    title: 'Dalia y el libro rojo',
+                    year: '2024',
+                    rating: '7.5',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/oyGyAQZOj7NzyLxCZX7FHKYELP1.jpg',
+                    description: 'Película Dalia y el libro rojo',
+                    type: 'movie',
+                    videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly92aW1lb3MubmV0L2VtYmVkLW0yZTR4dGgzOXpmby5odG1s'
+                },
+                {
+                    id: 'larga-vida-al-rey-julien',
+                    title: 'Larga vida al rey Julien',
+                    year: '2024',
+                    rating: '7.5',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/tsE6Dbx7aejDDmAy4DX55YxE8pT.jpg',
+                    description: 'Película Larga vida al rey Julien',
+                    type: 'movie',
+                    videoUrl: ''
+                },
+                {
+                    id: 'wallace-y-gromit-la-maldicin-de-las-verduras',
+                    title: 'Wallace y Gromit: La maldición de las verduras',
+                    year: '2024',
+                    rating: '7.5',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/7p4KL3yuXRvQgr9w9wpjqJpMNu5.jpg',
+                    description: 'Película Wallace y Gromit: La maldición de las verduras',
+                    type: 'movie',
+                    videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2hTbFBFUWNRQTJvcXJIaVN5R0gwZDdGVDFFWGgwM3JWUVo5UDdUV2Fyd3BhdktWcVlBUEt1Sm5nMlNnSEhjTGd1UVhjUTE4eUFvX3hhdVp0VGFjTGc4LQ=='
+                },
                 {
                     id: 'Enredados',
                     title: 'Enredados',
@@ -1581,6 +1645,226 @@
                     videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly92aW1lb3MubmV0L2VtYmVkLWQwY2V4eHdrdDNkOS5odG1s'
                 },
             ],
+            Deportes: [
+
+    {
+        id: 'tudn',
+        title: 'TUDN',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'Canal deportivo TUDN en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'tnt-sports',
+        title: 'TNT SPORTS',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://www.chilevision.cl/chilevision/site/artic/20210117/imag/foto_0000000120210117101202/Captura_de_Pantalla_2021_01_16_a_las_17_17_58.png',
+        description: 'TNT Sports en vivo.',
+        type: 'movie',
+        videoUrl: 'https://embed.ksdjugfsddeports.com/embed2/tntsports.html'
+    },
+
+    {
+        id: 'espn-premium-lat',
+        title: 'ESPN PREMIUM LAT',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN Premium Latinoamérica.',
+        type: 'movie',
+        videoUrl: 'https://yt3.googleusercontent.com/CDvZcyENCmGnq4guCMYZKe9eEjTTFJnWQovMDUMmwgE1AbxDactzOTHkdUxHe6kQfSmZ71Ol=s900-c-k-c0x00ffffff-no-rj'
+    },
+
+    {
+        id: 'espn-premium-arg',
+        title: 'ESPN PREMIUM ARGENTINA',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN Premium Argentina.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'tyc-sports',
+        title: 'TYC SPORTS',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://yt3.googleusercontent.com/blqLvy2eit2v5q0V7fksc0u6M4XUIkGcB_ML8Lc6kFvTnP_Qbg7JypFNKvT_itcFNGks6yO3Tw0=s900-c-k-c0x00ffffff-no-rj',
+        description: 'TyC Sports en vivo.',
+        type: 'movie',
+        videoUrl: 'https://embed.ksdjugfsddeports.com/embed2/tycsports.html'
+    },
+
+    {
+        id: 'fox-sports',
+        title: 'FOX SPORTS',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'Fox Sports en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'fox-sports-2',
+        title: 'FOX SPORTS 2',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'Fox Sports 2 en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'fox-sports-3',
+        title: 'FOX SPORTS 3',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'Fox Sports 3 en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'espn-lat',
+        title: 'ESPN LAT',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN Latinoamérica.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'espn-arg',
+        title: 'ESPN ARGENTINA',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN Argentina.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'espn-colombia',
+        title: 'ESPN COLOMBIA',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN Colombia.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'espn-2',
+        title: 'ESPN 2',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN 2 en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'espn-3',
+        title: 'ESPN 3',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN 3 en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'espn-4',
+        title: 'ESPN 4',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN 4 en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'espn-5',
+        title: 'ESPN 5',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN 5 en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'espn-6',
+        title: 'ESPN 6',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN 6 en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'espn-7',
+        title: 'ESPN 7',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'ESPN 7 en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    },
+
+    {
+        id: 'directv-sports',
+        title: 'DIRECTV SPORTS',
+        year: 'En Vivo',
+        rating: 'Activo',
+        genre: 'Deportes',
+        image: 'https://i.imgur.com/2DhmtJ4.jpg',
+        description: 'DirecTV Sports en vivo.',
+        type: 'movie',
+        videoUrl: 'LINK_AQUI'
+    }
+
+],
+
             series: [
                 {
     id: 'welcome-to-derry',
@@ -1923,6 +2207,7 @@
                         }
                     ]
                 },
+                
             
 {
     id: 'el-monstruo-de-florencia',
@@ -2290,6 +2575,123 @@
                                 { number: 8, title: '1x8 T1 - Descenso al infierno 2023', duration: '45 min', description: 'Episodio 8 de Ingobernable', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E8', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0XzFpZ0pubHNtWE9va3FYdENxd3FURTdyR3Y0emszbEtDVWpFczl5OEI1WFc1Q2p1RnhZeDh1TnRNOFpfdjBDUVI=' },
                                 { number: 9, title: '1x9 T1 - El juramento 2023', duration: '45 min', description: 'Episodio 9 de Ingobernable', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E9', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X1YuQ2o4dTV1ZnJHLnN0XzZVS05zTm1NVWgzbEdJc2I0Mm5HR2diandPOUw5R2JQQTdsT0MwekZCUHV6YjkweHR2YmVPamlxMlpHRm1yZS5oMG10UzZjdzFrSHdYZE9XRkE0cndOU1dMaXd3LQ==' },
                                 { number: 10, title: '1x15 T1 - El interés de la justicia 2023', duration: '45 min', description: 'Episodio 10 de Ingobernable', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E10', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X1YuQ2o4dTV1ZnJHLnN0XzZVS05zTms2eWxvM244YmZKTXFiRGJWZFpjU2d4T18uNk9lLlU1TjQ5T0VUR2ZHWlFqbGpaXzdQS3poQ3dza2dLMXRLZjlpN2VzM0lwTkk2WWx4Q3JTU0ZBNnhrLQ==' }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'motorvalley',
+                    title: 'Motorvalley',
+                    year: '2024',
+                    rating: '8.0',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/dJhLe1XSlIhetCsArAzgubg2aD5.jpg',
+                    description: 'Serie Motorvalley',
+                    type: 'series',
+                    seasons: [
+                        {
+                            number: 1,
+                            episodes: [
+                                { number: 1, title: '1x1 T1 - Episodio 1 2023', duration: '45 min', description: 'Episodio 1 de Motorvalley', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E1', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT293TUpubmlPdXBpcXhDSjd6U0dhcG00akRVSlNVb3Q5UVUzRTREM2I1dE9iZHFsLks1M0diSWhBNkJna0lmNEhKNG9HLnJJdzRQV256bmhlU1pVdnRzLQ==' },
+                                { number: 2, title: '1x2 T1 - Episodio 2 2023', duration: '45 min', description: 'Episodio 2 de Motorvalley', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E2', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2pWUU9NOEtGTkVScnZxcFZMQWZwbVhzZV9FRk80cklpVC5ySjg5ZnFEUnVMVjRXX01TcFhXb2lHRHM1QlQyeUQ3czNGc0xQUU5ObUs1Vm5LZGZnMlNBLQ==' },
+                                { number: 3, title: '1x3 T1 - Episodio 3 2023', duration: '45 min', description: 'Episodio 3 de Motorvalley', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E3', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3FqMVZUb0h2Tk9adUtPTnhuZWVhQnRuRzh5Q2h2cGFUODk2WHcyUWhDUHhxdzYycUk0UktnZ0lnNVh0U3VaclpxZ3Z5TU52YURST3JTOWZoRGwyZmxNLQ==' },
+                                { number: 4, title: '1x4 T1 - Episodio 4 2023', duration: '45 min', description: 'Episodio 4 de Motorvalley', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E4', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3Z3TXpRc3RaUkpvM2FoYVI5OFIzZGc1dEhtaEw1N0pLUEcycV9rTVNXLjRrdGVmZWExSl8uSU03dE1TckJZSDRGXzNyMlUxWTZ4ZkRsem1KeTJmS2w0LQ==' },
+                                { number: 5, title: '1x5 T1 - Episodio 5 2023', duration: '45 min', description: 'Episodio 5 de Motorvalley', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E5', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2s2Vlg0cDZoRXpBWC5TcXh5Yk5xVjB4VGE0VFZlMFIuOG1lOTJGX05BZVE1U3k4NGtmTC5nc3F6Z2VqenBnVUc0YXpmcUJmUjNMTnRlWXRkS2FyQ3NjLQ==' },
+                                { number: 6, title: '1x6 T1 - Episodio 6 2023', duration: '45 min', description: 'Episodio 6 de Motorvalley', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E6', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3VGSnJGMnhZX3loWmR4SG1OSnJoUkJ5MDE4Umx5NEJaTGdLM3d1cTduMnp3cFNnb3U3WFQwTFFSUkhIQ0JGZHRTaWkzQ3lWYlhOY2JTOXguNnJpSFEwLQ==' }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'el-tiempo-de-las-moscas',
+                    title: 'El tiempo de las moscas',
+                    year: '2024',
+                    rating: '8.0',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/9n2HM0guy6Wn95EshDj7Uw6XWd2.jpg',
+                    description: 'Serie El tiempo de las moscas',
+                    type: 'series',
+                    seasons: [
+                        {
+                            number: 1,
+                            episodes: [
+                                { number: 1, title: '1x1 T1 - Hoy empiezo de nuevo 2023', duration: '45 min', description: 'Episodio 1 de El tiempo de las moscas', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E1', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT29aeF96dE9LeVZadEJGODRUOWdQRHVfaEx1NDc3QUh0Y0xjaWFzdFhMUXlnX2RBQlo5R2VXMGJSWjVlQThtNGdHdWN0bDVqMTNhaHdiRUNveVVlQ0d3LQ==' },
+                                { number: 2, title: '1x2 T1 - Pena por envenenamiento 2023', duration: '45 min', description: 'Episodio 2 de El tiempo de las moscas', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E2', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2wxN1YxUlh1TnRCeE1IMmtzRE9CS0oxSkFlSnFSSWFVNTYucDdzSksxM1RmYlJTd1dUV2lSODBQUkdBZDRQSmNnTEZtMGFfdmxQSHVTZFFaVThWOHJJLQ==' },
+                                { number: 3, title: '1x3 T1 - Tu vida no termina acá 2023', duration: '45 min', description: 'Episodio 3 de El tiempo de las moscas', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E3', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3MudlFXbVFtcnA1TzBkTXZPcTFoSDV1RG5nXzBzZUZtUHRMYnRNMXZTZXZLaVlzT0lSVUtjTFc3U0ZVbGxIQmh3RWpnMGhmb3I3eFV2X0RUWG85R2lZLQ==' },
+                                { number: 4, title: '1x4 T1 - No se investiga más 2023', duration: '45 min', description: 'Episodio 4 de El tiempo de las moscas', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E4', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3RmRXFodGNub0VWcVQxT1cuM3Z0ZjFoa1NaUVI0Qmw4UndIRFppd2VyS1hYZk5JLm5jaFFrSEZXeVVLMnFtLlV1NFFfX1RmeXE5REZIYTdEc3ZvOVJBLQ==' },
+                                { number: 5, title: '1x5 T1 - Esto ya está robado 2023', duration: '45 min', description: 'Episodio 5 de El tiempo de las moscas', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E5', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2g2QTVEUVNVaGRyZGF4WkpCZWI4aXN3aUk4enhSTm1HbFpBdzNubXQ0SGJqWVVqVVZ6SlU3OXdiVXF4T0J3NFdaa2hzdUdwRkx4ZVR1MlB1UWxkWWYwLQ==' },
+                                { number: 6, title: '1x6 T1 - El tiempo de las moscas 2023', duration: '45 min', description: 'Episodio 6 de El tiempo de las moscas', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E6', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3JjcF9PUEU5ZUpaRnNqRlMwRGVteERtRHpsMnIzdFZrMkFXSWtNZW1pX29SRHVaM1NsekRUdzRDdC44Y01tdjRvTjJMMktSekhVUEREOUgyaUx2TXE0LQ==' }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'crutch',
+                    title: 'Crutch',
+                    year: '2024',
+                    rating: '8.0',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/9tDDG9mLfhJmqOyvolWneeF6Y1g.jpg',
+                    description: 'Serie Crutch',
+                    type: 'series',
+                    seasons: [
+                        {
+                            number: 1,
+                            episodes: [
+                                { number: 1, title: '1x1 T1 - Episodio 1 2023', duration: '45 min', description: 'Episodio 1 de Crutch', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E1', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2pqcWVKT0Y2OHRrRG5XYThnNUlHd1FDOWpRTmszWHBNWVdZWHJLS29UWlk2Z2M5WGpBbzZlUmRHamxGcjJyZlY1eWVMUkNva3U2VEZ4MUplWnVQdmhZLQ==' },
+                                { number: 2, title: '1x2 T1 - Episodio 2 2023', duration: '45 min', description: 'Episodio 2 de Crutch', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E2', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2hpT0Z0VFJBMHBWd2pYaWh6c2RDbnBpWHNOMmxTajNEOVNDbjEwNk1SV1JxSHF5ckNEcXkzNHo1WU43eTd2bC5KOGNURng4cXFWYmI4TXlrQXZvczU0LQ==' },
+                                { number: 3, title: '1x3 T1 - Episodio 3 2023', duration: '45 min', description: 'Episodio 3 de Crutch', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E3', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2hRV0xOTDA0bzlQX2ZsSTZCbFg2X0ZaTVBxTlo1SFpwOUlFVFNtaHdRWk9xeVJ3cjlYbkFib0RaUHh4Tnd4R25lckQxcTNQX2xCU01MUmpicDZzZlRvLQ==' },
+                                { number: 4, title: '1x4 T1 - Episodio 4 2023', duration: '45 min', description: 'Episodio 4 de Crutch', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E4', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3BNTUJXeFZtNHlrbFY3M3FrUTdidXhKMEJfcDJZRm1ZZXlfSEcwZVVLUUxtejNwRkI1T201eW1ZMEdwTW45V1RscjJPdHo0T3dxUVFtMGFZUDIyMzJrLQ==' },
+                                { number: 5, title: '1x5 T1 - Episodio 5 2023', duration: '45 min', description: 'Episodio 5 de Crutch', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E5', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT21OcnkxMWlkMzVyN3Y3OGpxUjUxZlpYRC5SM2g1cjVjY01DQjhnNHRVZW5va3c0cldLdGJnN1Y4SmF0cWg4MXROU0djOTV5LjZkSmZnQnhlV1ZjdTI4LQ==' },
+                                { number: 6, title: '1x6 T1 - Episodio 6 2023', duration: '45 min', description: 'Episodio 6 de Crutch', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E6', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3R1S2FTQjJzYzc4Y2FydjNJTXEyZmdZOTd2ei5PeVlkVm81aHpSalRjM25wMlh4U0NxUHYxek9QOUx6aGNSUVl3UHhnSmFKNTJlOVBCRFlCSHUydHpJLQ==' },
+                                { number: 7, title: '1x7 T1 - Episodio 7 2023', duration: '45 min', description: 'Episodio 7 de Crutch', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E7', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2tJWTkwSmx6QURjTUk4aWJxaV9YY0pTTC5acGF4RzNtU0lpLkRvNVFNYW4xdW5qN3FBLlMwLlF4ZGJETFAuZ2NMaTVRTm53ckd0Wkp5ekhtOW1aQmhBLQ==' },
+                                { number: 8, title: '1x8 T1 - Episodio 8 2023', duration: '45 min', description: 'Episodio 8 de Crutch', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E8', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3VKV1JNLlA5SWpNLlpBX0hlWWlyRVhSTFlxZnYwLnVUaUR0RTZ6bHBQaTlNMWJoRjQ0WTFIOV9mS1VPTFRMWkNkWk5IZlg1WU0ueVA0dm9nZkV5WDRjLQ==' }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'murder-before-evensong',
+                    title: 'Murder Before Evensong',
+                    year: '2024',
+                    rating: '8.0',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/xn7TFZnR9U2KpJovIg5F1WZ1qs2.jpg',
+                    description: 'Serie Murder Before Evensong',
+                    type: 'series',
+                    seasons: [
+                        {
+                            number: 1,
+                            episodes: [
+                                { number: 1, title: '1x1 T1 - Episodio 1 2023', duration: '45 min', description: 'Episodio 1 de Murder Before Evensong', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E1', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2xlM21hckl6Y0d5RDhDSFg1X3pNUGF6eUVON0JERHhXbV9hQ2t1TTBFa2tvdVYxUFFDQnhJMWQ1NUFpbzRNX2lfMHhvNnhMX3Nxei52REt2bm9CaFV3LQ==' },
+                                { number: 2, title: '1x2 T1 - Episodio 2 2023', duration: '45 min', description: 'Episodio 2 de Murder Before Evensong', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E2', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT3R5S2FLTmJ3ZnJKOWU2NzB0RkUxRWlmc0tIQm15RER1MmcwVF9HWkdHVW00TUVDd1JreVZNOWhSUEtULkhxcGVDQVRpYlkxMGNDYWZkekRLWUQzYXdNLQ==' },
+                                { number: 3, title: '1x3 T1 - Episodio 3 2023', duration: '45 min', description: 'Episodio 3 de Murder Before Evensong', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E3', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT29PeEZ4ODlYbTROdGRxVFdESVltSjNValJua0taQnlnV1R3Y0lfWjBtUE1QQWFOSUhpblJ1VjJfNEl2QVhlTXJ6ejZ6SjhTQnlyVVRtRjh4N3VweWtNLQ==' },
+                                { number: 4, title: '1x4 T1 - Episodio 4 2023', duration: '45 min', description: 'Episodio 4 de Murder Before Evensong', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E4', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2swZ0VWOW5fRGhJRUJnOUU5dkpuU2dpUjFObFZfVmtoM283bFFrWEFjV3lhX2l2b3NiRWk5VWxqeW1mb1JreXY1NktZY0pqclFhM2laVUcyMHJQdFRJLQ==' },
+                                { number: 5, title: '1x5 T1 - Episodio 5 2023', duration: '45 min', description: 'Episodio 5 de Murder Before Evensong', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E5', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2pYdHR1enRYQXRfd01UWkNCVUNUc3hTclZTcXp0QlVnakJDX3VtS1pQOG15OUdicG9KRmk5bW5UQThNNmVPOV96MzVRVnVqUGpBUXVvaVZYTWZvVHVNLQ==' },
+                                { number: 6, title: '1x6 T1 - Episodio 6 2023', duration: '45 min', description: 'Episodio 6 de Murder Before Evensong', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E6', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2pHakFKM1NoYWxJS3pfUEhoTHdxUnJ0RkZHdEFRNTB3cUYwaEwwRXB6bFVhNGN1cjFHaWNBM0hmdld4M0w2YjBMLkppbmg0NXpsUjU1eWs4Ym5oTEtNLQ==' }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'quebranto',
+                    title: 'Quebranto',
+                    year: '2024',
+                    rating: '8.0',
+                    genre: 'Drama',
+                    image: 'https://image.tmdb.org/t/p/w300/9vahoC2zp3egFmhS12hQY6dSnm8.jpg',
+                    description: 'Serie Quebranto',
+                    type: 'series',
+                    seasons: [
+                        {
+                            number: 1,
+                            episodes: [
+                                { number: 1, title: '1x1 T1 - Episodio 1 2023', duration: '45 min', description: 'Episodio 1 de Quebranto', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E1', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT25obUIxTVN0N3QwRWZBb2VoVXU5WE9QYlBXWDdxSWk0cTFKbGZ3NDhPSGN0SU04MmNpUXFkMTI3THQ0X0Jic19aU1J0aWlJSWwzQ0c0eUdkVzMyci5vLQ==' },
+                                { number: 2, title: '1x2 T1 - Episodio 2 2023', duration: '45 min', description: 'Episodio 2 de Quebranto', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E2', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2lmeUVFMUhLTUo0Z1lSTDdsYTk5ZkF5NzBUb0pwM0NoRk5jbUhGTkdfTlhNNHU5NU9YUElWTUZpMDQ5RE1RdExOUnJpRktxTXNORXYyaDgxYkVrbFA4LQ==' },
+                                { number: 3, title: '1x3 T1 - Episodio 3 2023', duration: '45 min', description: 'Episodio 3 de Quebranto', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E3', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT21icnZKRmM0X1o2M3lKMDFGeTVOUU1tcndkd2FsR1RMaHF0dVdGYkYuaTN6QXNWLlNIZ0szazZOMk5YRjRYNm1HSWd3RHlSME9qWDlMT2o5NFROQlowLQ==' },
+                                { number: 4, title: '1x4 T1 - Episodio 4 2023', duration: '45 min', description: 'Episodio 4 de Quebranto', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E4', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT2hPTENraXJtZHY3UVV3b01aelRTN205T0k0cjNHZ1dFWlZSUzJKMC4uZUhfNW14SnE2eFo4TG1UU1I3YTd1Y1lxcXhfSzRXNmU3aXBEcndCWFJDV24wLQ==' },
+                                { number: 5, title: '1x5 T1 - Episodio 5 2023', duration: '45 min', description: 'Episodio 5 de Quebranto', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E5', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT25BMXFlMUlFcm01YWJZSFlNaW1Tb2lhT0tsdnQ5MmdzZ3VQSHdQdmo5d3J0X1NfQlZBMmlSWmdpRjVKQmJKVHVOUjkwY04zbldLWm5NV0xaSEVZZTlnLQ==' },
+                                { number: 6, title: '1x6 T1 - Episodio 6 2023', duration: '45 min', description: 'Episodio 6 de Quebranto', thumbnail: 'https://via.placeholder.com/150x85/1a2f45/00d4ff?text=E6', videoUrl: 'https://cue.cuevana3.nu/embed-page?showEmbed=aHR0cHM6Ly9kb28ubGF0L2Zha2VwbGF5ZXIucGhwP2g9MDM0X3hmbW42M25zMzRKRHVDS1JseHBLT25TcTdEa1o5Mi5PVjIyZUpyazRqMEFNQk1SRjYxQkRUN1dCU3JXUkNvc3dqVWtyZVJjazdsdkVlUXVFSEVlLkZZb1IyYlEwYXpVa21oMWxKVmhfckVZLQ==' }
                             ]
                         }
                     ]
@@ -4481,6 +4883,795 @@
         }
     ]
 },
+ {
+        id: 'horimiya-piece',
+        title: 'Horimiya: Piece',
+        year: '2025',
+        rating: '8.0',
+        genre: 'Anime, Aventura',
+        image: 'https://animeflv.net/uploads/animes/covers/3819.jpg',
+        description: 'Serie de anime Horimiya: Piece',
+        type: 'series',
+        seasons: [
+            {
+                number: 1,
+                episodes: [
+                    {
+                        number: 1,
+                        title: 'Horimiya: Piece 1',
+                        duration: '24 min',
+                        description: 'Episodio 1 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP1',
+                        videoUrl: 'https://streamwish.to/e/0s7ccyj5zpih'
+                    },
+                    {
+                        number: 2,
+                        title: 'Horimiya: Piece 2',
+                        duration: '24 min',
+                        description: 'Episodio 2 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP2',
+                        videoUrl: 'https://streamwish.to/e/5emt3cwf2x0y'
+                    },
+                    {
+                        number: 3,
+                        title: 'Horimiya: Piece 3',
+                        duration: '24 min',
+                        description: 'Episodio 3 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP3',
+                        videoUrl: 'https://streamwish.to/e/narc6thzrxad'
+                    },
+                    {
+                        number: 4,
+                        title: 'Horimiya: Piece 4',
+                        duration: '24 min',
+                        description: 'Episodio 4 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP4',
+                        videoUrl: 'https://streamwish.to/e/kjtv7qiflgxk'
+                    },
+                    {
+                        number: 5,
+                        title: 'Horimiya: Piece 5',
+                        duration: '24 min',
+                        description: 'Episodio 5 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP5',
+                        videoUrl: 'https://streamwish.to/e/tf4xxyybmxbj'
+                    },
+                    {
+                        number: 6,
+                        title: 'Horimiya: Piece 6',
+                        duration: '24 min',
+                        description: 'Episodio 6 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP6',
+                        videoUrl: 'https://streamwish.to/e/67r614695gbg'
+                    },
+                    {
+                        number: 7,
+                        title: 'Horimiya: Piece 7',
+                        duration: '24 min',
+                        description: 'Episodio 7 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP7',
+                        videoUrl: 'https://streamwish.to/e/dgae4z4i38aw'
+                    },
+                    {
+                        number: 8,
+                        title: 'Horimiya: Piece 8',
+                        duration: '24 min',
+                        description: 'Episodio 8 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP8',
+                        videoUrl: 'https://streamwish.to/e/88qqtxtgi1c9'
+                    },
+                    {
+                        number: 9,
+                        title: 'Horimiya: Piece 9',
+                        duration: '24 min',
+                        description: 'Episodio 9 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP9',
+                        videoUrl: 'https://streamwish.to/e/3f53pahxg2lr'
+                    },
+                    {
+                        number: 10,
+                        title: 'Horimiya: Piece 10',
+                        duration: '24 min',
+                        description: 'Episodio 10 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP10',
+                        videoUrl: 'https://streamwish.to/e/5vjtbxbas63k'
+                    },
+                    {
+                        number: 11,
+                        title: 'Horimiya: Piece 11',
+                        duration: '24 min',
+                        description: 'Episodio 11 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP11',
+                        videoUrl: 'https://streamwish.to/e/ln6367vbgkz0'
+                    },
+                    {
+                        number: 12,
+                        title: 'Horimiya: Piece 12',
+                        duration: '24 min',
+                        description: 'Episodio 12 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP12',
+                        videoUrl: 'https://streamwish.to/e/jj2vxig2rpjv'
+                    },
+                    {
+                        number: 13,
+                        title: 'Horimiya: Piece 13',
+                        duration: '24 min',
+                        description: 'Episodio 13 de Horimiya: Piece',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP13',
+                        videoUrl: 'https://streamwish.to/e/1bc68rf4nbje'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'iseleve',
+        title: 'Iseleve',
+        year: '2025',
+        rating: '8.0',
+        genre: 'Anime, Aventura',
+        image: 'https://animeflv.net/uploads/animes/covers/3779.jpg',
+        description: 'Serie de anime Iseleve',
+        type: 'series',
+        seasons: [
+            {
+                number: 1,
+                episodes: [
+                    {
+                        number: 1,
+                        title: 'Iseleve 1',
+                        duration: '24 min',
+                        description: 'Episodio 1 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP1',
+                        videoUrl: 'https://streamwish.to/e/h6ajgynfmzaq'
+                    },
+                    {
+                        number: 2,
+                        title: 'Iseleve 2',
+                        duration: '24 min',
+                        description: 'Episodio 2 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP2',
+                        videoUrl: 'https://streamwish.to/e/vv9ozymha0q9'
+                    },
+                    {
+                        number: 3,
+                        title: 'Iseleve 3',
+                        duration: '24 min',
+                        description: 'Episodio 3 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP3',
+                        videoUrl: 'https://streamwish.to/e/imviqh1oxee5'
+                    },
+                    {
+                        number: 4,
+                        title: 'Iseleve 4',
+                        duration: '24 min',
+                        description: 'Episodio 4 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP4',
+                        videoUrl: 'https://streamwish.to/e/wos41iueqjft'
+                    },
+                    {
+                        number: 5,
+                        title: 'Iseleve 5',
+                        duration: '24 min',
+                        description: 'Episodio 5 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP5',
+                        videoUrl: 'https://streamwish.to/e/k3b69rrgpbiy'
+                    },
+                    {
+                        number: 6,
+                        title: 'Iseleve 6',
+                        duration: '24 min',
+                        description: 'Episodio 6 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP6',
+                        videoUrl: 'https://streamwish.to/e/w8mhqtdyarly'
+                    },
+                    {
+                        number: 7,
+                        title: 'Iseleve 7',
+                        duration: '24 min',
+                        description: 'Episodio 7 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP7',
+                        videoUrl: 'https://streamwish.to/e/xkc71ygni3j4'
+                    },
+                    {
+                        number: 8,
+                        title: 'Iseleve 8',
+                        duration: '24 min',
+                        description: 'Episodio 8 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP8',
+                        videoUrl: 'https://streamwish.to/e/zw8jjovcs1y0'
+                    },
+                    {
+                        number: 9,
+                        title: 'Iseleve 9',
+                        duration: '24 min',
+                        description: 'Episodio 9 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP9',
+                        videoUrl: 'https://streamwish.to/e/hbqzhmvg1xlv'
+                    },
+                    {
+                        number: 10,
+                        title: 'Iseleve 10',
+                        duration: '24 min',
+                        description: 'Episodio 10 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP10',
+                        videoUrl: 'https://streamwish.to/e/kx2m3qkndzsp'
+                    },
+                    {
+                        number: 11,
+                        title: 'Iseleve 11',
+                        duration: '24 min',
+                        description: 'Episodio 11 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP11',
+                        videoUrl: 'https://streamwish.to/e/sa8ff2120vf1'
+                    },
+                    {
+                        number: 12,
+                        title: 'Iseleve 12',
+                        duration: '24 min',
+                        description: 'Episodio 12 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP12',
+                        videoUrl: 'https://streamwish.to/e/y0agcz1e07sd'
+                    },
+                    {
+                        number: 13,
+                        title: 'Iseleve 13',
+                        duration: '24 min',
+                        description: 'Episodio 13 de Iseleve',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP13',
+                        videoUrl: 'https://streamwish.to/e/4ikeshnzqg0u'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'ijiranaide-nagatoro-san',
+        title: 'Ijiranaide, Nagatoro-san',
+        year: '2025',
+        rating: '8.0',
+        genre: 'Anime, Aventura',
+        image: 'https://animeflv.net/uploads/animes/covers/3460.jpg',
+        description: 'Serie de anime Ijiranaide, Nagatoro-san',
+        type: 'series',
+        seasons: [
+            {
+                number: 1,
+                episodes: [
+                    {
+                        number: 1,
+                        title: 'Ijiranaide, Nagatoro-san 1',
+                        duration: '24 min',
+                        description: 'Episodio 1 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP1',
+                        videoUrl: 'https://streamwish.to/e/8i7amrutu9ag'
+                    },
+                    {
+                        number: 2,
+                        title: 'Ijiranaide, Nagatoro-san 2',
+                        duration: '24 min',
+                        description: 'Episodio 2 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP2',
+                        videoUrl: 'https://streamwish.to/e/lj50nixx7z0r'
+                    },
+                    {
+                        number: 3,
+                        title: 'Ijiranaide, Nagatoro-san 3',
+                        duration: '24 min',
+                        description: 'Episodio 3 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP3',
+                        videoUrl: 'https://streamwish.to/e/bzc6eb5du2lj'
+                    },
+                    {
+                        number: 4,
+                        title: 'Ijiranaide, Nagatoro-san 4',
+                        duration: '24 min',
+                        description: 'Episodio 4 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP4',
+                        videoUrl: 'https://streamwish.to/e/31wk0a7kj5ws'
+                    },
+                    {
+                        number: 5,
+                        title: 'Ijiranaide, Nagatoro-san 5',
+                        duration: '24 min',
+                        description: 'Episodio 5 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP5',
+                        videoUrl: 'https://streamwish.to/e/eag41dn4exec'
+                    },
+                    {
+                        number: 6,
+                        title: 'Ijiranaide, Nagatoro-san 6',
+                        duration: '24 min',
+                        description: 'Episodio 6 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP6',
+                        videoUrl: 'https://streamwish.to/e/rx4elf0nily1'
+                    },
+                    {
+                        number: 7,
+                        title: 'Ijiranaide, Nagatoro-san 7',
+                        duration: '24 min',
+                        description: 'Episodio 7 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP7',
+                        videoUrl: 'https://streamwish.to/e/ypdbne103lir'
+                    },
+                    {
+                        number: 8,
+                        title: 'Ijiranaide, Nagatoro-san 8',
+                        duration: '24 min',
+                        description: 'Episodio 8 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP8',
+                        videoUrl: 'https://streamwish.to/e/1isdr25w0w46'
+                    },
+                    {
+                        number: 9,
+                        title: 'Ijiranaide, Nagatoro-san 9',
+                        duration: '24 min',
+                        description: 'Episodio 9 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP9',
+                        videoUrl: 'https://streamwish.to/e/0spfemfgaby4'
+                    },
+                    {
+                        number: 10,
+                        title: 'Ijiranaide, Nagatoro-san 10',
+                        duration: '24 min',
+                        description: 'Episodio 10 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP10',
+                        videoUrl: 'https://streamwish.to/e/evkwcr4llq3u'
+                    },
+                    {
+                        number: 11,
+                        title: 'Ijiranaide, Nagatoro-san 11',
+                        duration: '24 min',
+                        description: 'Episodio 11 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP11',
+                        videoUrl: 'https://streamwish.to/e/81o0g3yx362q'
+                    },
+                    {
+                        number: 12,
+                        title: 'Ijiranaide, Nagatoro-san 12',
+                        duration: '24 min',
+                        description: 'Episodio 12 de Ijiranaide, Nagatoro-san',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP12',
+                        videoUrl: 'https://streamwish.to/e/toxr2dcxhqe8'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'blue-lock',
+        title: 'Blue Lock',
+        year: '2025',
+        rating: '8.0',
+        genre: 'Anime, Aventura',
+        image: 'https://animeflv.net/uploads/animes/covers/3701.jpg',
+        description: 'Serie de anime Blue Lock',
+        type: 'series',
+        seasons: [
+            {
+                number: 1,
+                episodes: [
+                    {
+                        number: 1,
+                        title: 'Blue Lock 1',
+                        duration: '24 min',
+                        description: 'Episodio 1 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP1',
+                        videoUrl: 'https://streamwish.to/e/f5dc8u1bmfuk'
+                    },
+                    {
+                        number: 2,
+                        title: 'Blue Lock 2',
+                        duration: '24 min',
+                        description: 'Episodio 2 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP2',
+                        videoUrl: 'https://streamwish.to/e/uiow1o7ondii'
+                    },
+                    {
+                        number: 3,
+                        title: 'Blue Lock 3',
+                        duration: '24 min',
+                        description: 'Episodio 3 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP3',
+                        videoUrl: 'https://streamwish.to/e/joogzqidk877'
+                    },
+                    {
+                        number: 4,
+                        title: 'Blue Lock 4',
+                        duration: '24 min',
+                        description: 'Episodio 4 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP4',
+                        videoUrl: 'https://streamwish.to/e/48le9x01ebjd'
+                    },
+                    {
+                        number: 5,
+                        title: 'Blue Lock 5',
+                        duration: '24 min',
+                        description: 'Episodio 5 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP5',
+                        videoUrl: 'https://streamwish.to/e/zbp0oa8e8mlx'
+                    },
+                    {
+                        number: 6,
+                        title: 'Blue Lock 6',
+                        duration: '24 min',
+                        description: 'Episodio 6 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP6',
+                        videoUrl: 'https://streamwish.to/e/1yx4ul5jh0xx'
+                    },
+                    {
+                        number: 7,
+                        title: 'Blue Lock 7',
+                        duration: '24 min',
+                        description: 'Episodio 7 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP7',
+                        videoUrl: 'https://streamwish.to/e/5ld17f70hhwx'
+                    },
+                    {
+                        number: 8,
+                        title: 'Blue Lock 8',
+                        duration: '24 min',
+                        description: 'Episodio 8 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP8',
+                        videoUrl: 'https://streamwish.to/e/0z6jf648uiik'
+                    },
+                    {
+                        number: 9,
+                        title: 'Blue Lock 9',
+                        duration: '24 min',
+                        description: 'Episodio 9 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP9',
+                        videoUrl: 'https://streamwish.to/e/d04veso0pia0'
+                    },
+                    {
+                        number: 10,
+                        title: 'Blue Lock 10',
+                        duration: '24 min',
+                        description: 'Episodio 10 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP10',
+                        videoUrl: 'https://streamwish.to/e/vtao49km7tuy'
+                    },
+                    {
+                        number: 11,
+                        title: 'Blue Lock 11',
+                        duration: '24 min',
+                        description: 'Episodio 11 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP11',
+                        videoUrl: 'https://streamwish.to/e/hjmj5dbj7av2'
+                    },
+                    {
+                        number: 12,
+                        title: 'Blue Lock 12',
+                        duration: '24 min',
+                        description: 'Episodio 12 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP12',
+                        videoUrl: 'https://streamwish.to/e/x0bo2310twns'
+                    },
+                    {
+                        number: 13,
+                        title: 'Blue Lock 13',
+                        duration: '24 min',
+                        description: 'Episodio 13 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP13',
+                        videoUrl: 'https://streamwish.to/e/l1c0sk4k6074'
+                    },
+                    {
+                        number: 14,
+                        title: 'Blue Lock 14',
+                        duration: '24 min',
+                        description: 'Episodio 14 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP14',
+                        videoUrl: 'https://streamwish.to/e/rihxheu8fqff'
+                    },
+                    {
+                        number: 15,
+                        title: 'Blue Lock 15',
+                        duration: '24 min',
+                        description: 'Episodio 15 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP15',
+                        videoUrl: 'https://streamwish.to/e/ncbstxac2cu1'
+                    },
+                    {
+                        number: 16,
+                        title: 'Blue Lock 16',
+                        duration: '24 min',
+                        description: 'Episodio 16 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP16',
+                        videoUrl: 'https://streamwish.to/e/aq2e42gm38ew'
+                    },
+                    {
+                        number: 17,
+                        title: 'Blue Lock 17',
+                        duration: '24 min',
+                        description: 'Episodio 17 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP17',
+                        videoUrl: 'https://streamwish.to/e/8o2u7oufacnk'
+                    },
+                    {
+                        number: 18,
+                        title: 'Blue Lock 18',
+                        duration: '24 min',
+                        description: 'Episodio 18 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP18',
+                        videoUrl: 'https://streamwish.to/e/fkfvkvij6905'
+                    },
+                    {
+                        number: 19,
+                        title: 'Blue Lock 19',
+                        duration: '24 min',
+                        description: 'Episodio 19 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP19',
+                        videoUrl: 'https://streamwish.to/e/xcvtu7ok842r'
+                    },
+                    {
+                        number: 20,
+                        title: 'Blue Lock 20',
+                        duration: '24 min',
+                        description: 'Episodio 20 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP20',
+                        videoUrl: 'https://streamwish.to/e/ktww6q36uwve'
+                    },
+                    {
+                        number: 21,
+                        title: 'Blue Lock 21',
+                        duration: '24 min',
+                        description: 'Episodio 21 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP21',
+                        videoUrl: 'https://streamwish.to/e/uwem7qrjh1di'
+                    },
+                    {
+                        number: 22,
+                        title: 'Blue Lock 22',
+                        duration: '24 min',
+                        description: 'Episodio 22 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP22',
+                        videoUrl: 'https://streamwish.to/e/mozlm29yrfte'
+                    },
+                    {
+                        number: 23,
+                        title: 'Blue Lock 23',
+                        duration: '24 min',
+                        description: 'Episodio 23 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP23',
+                        videoUrl: 'https://streamwish.to/e/887b72nev0w2'
+                    },
+                    {
+                        number: 24,
+                        title: 'Blue Lock 24',
+                        duration: '24 min',
+                        description: 'Episodio 24 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP24',
+                        videoUrl: 'https://streamwish.to/e/dg1n9p1vw1kf'
+                    },
+                    {
+                        number: 25,
+                        title: 'Blue Lock 25',
+                        duration: '24 min',
+                        description: 'Episodio 25 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP25',
+                        videoUrl: 'https://streamwish.to/e/xjw6fms83sir'
+                    },
+                    {
+                        number: 26,
+                        title: 'Blue Lock 26',
+                        duration: '24 min',
+                        description: 'Episodio 26 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP26',
+                        videoUrl: 'https://streamwish.to/e/8i61yqhhz5v9'
+                    },
+                    {
+                        number: 27,
+                        title: 'Blue Lock 27',
+                        duration: '24 min',
+                        description: 'Episodio 27 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP27',
+                        videoUrl: 'https://streamwish.to/e/v2bnohn8sufg'
+                    },
+                    {
+                        number: 28,
+                        title: 'Blue Lock 28',
+                        duration: '24 min',
+                        description: 'Episodio 28 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP28',
+                        videoUrl: 'https://streamwish.to/e/pk0julrkh0jk'
+                    },
+                    {
+                        number: 29,
+                        title: 'Blue Lock 29',
+                        duration: '24 min',
+                        description: 'Episodio 29 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP29',
+                        videoUrl: 'https://streamwish.to/e/rdqkjsr27sh6'
+                    },
+                    {
+                        number: 30,
+                        title: 'Blue Lock 30',
+                        duration: '24 min',
+                        description: 'Episodio 30 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP30',
+                        videoUrl: 'https://streamwish.to/e/7cw4uptetmoe'
+                    },
+                    {
+                        number: 31,
+                        title: 'Blue Lock 31',
+                        duration: '24 min',
+                        description: 'Episodio 31 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP31',
+                        videoUrl: 'https://streamwish.to/e/6rr6nkuesnck'
+                    },
+                    {
+                        number: 32,
+                        title: 'Blue Lock 32',
+                        duration: '24 min',
+                        description: 'Episodio 32 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP32',
+                        videoUrl: 'https://streamwish.to/e/jlr1ajrza8gl'
+                    },
+                    {
+                        number: 33,
+                        title: 'Blue Lock 33',
+                        duration: '24 min',
+                        description: 'Episodio 33 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP33',
+                        videoUrl: 'https://streamwish.to/e/42it2usmuw5v'
+                    },
+                    {
+                        number: 34,
+                        title: 'Blue Lock 34',
+                        duration: '24 min',
+                        description: 'Episodio 34 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP34',
+                        videoUrl: 'https://streamwish.to/e/ul3vwa3xjvfc'
+                    },
+                    {
+                        number: 35,
+                        title: 'Blue Lock 35',
+                        duration: '24 min',
+                        description: 'Episodio 35 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP35',
+                        videoUrl: 'https://streamwish.to/e/23fj2292gemt'
+                    },
+                    {
+                        number: 36,
+                        title: 'Blue Lock 36',
+                        duration: '24 min',
+                        description: 'Episodio 36 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP36',
+                        videoUrl: 'https://streamwish.to/e/rx3d904p8rc7'
+                    },
+                    {
+                        number: 37,
+                        title: 'Blue Lock 37',
+                        duration: '24 min',
+                        description: 'Episodio 37 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP37',
+                        videoUrl: 'https://streamwish.to/e/gpmsl2g11jec'
+                    },
+                    {
+                        number: 38,
+                        title: 'Blue Lock 38',
+                        duration: '24 min',
+                        description: 'Episodio 38 de Blue Lock',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP38',
+                        videoUrl: 'https://streamwish.to/e/y59q9fyjjygn'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'isekai-meikyuu-de-harem-wo',
+        title: 'Isekai Meikyuu de Harem wo',
+        year: '2025',
+        rating: '8.0',
+        genre: 'Anime, Aventura',
+        image: 'https://animeflv.net/uploads/animes/covers/3647.jpg',
+        description: 'Serie de anime Isekai Meikyuu de Harem wo',
+        type: 'series',
+        seasons: [
+            {
+                number: 1,
+                episodes: [
+                    {
+                        number: 1,
+                        title: 'Isekai Meikyuu de Harem wo 1',
+                        duration: '24 min',
+                        description: 'Episodio 1 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP1',
+                        videoUrl: 'https://streamwish.to/e/4ex7e0mcm3np'
+                    },
+                    {
+                        number: 2,
+                        title: 'Isekai Meikyuu de Harem wo 2',
+                        duration: '24 min',
+                        description: 'Episodio 2 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP2',
+                        videoUrl: 'https://streamwish.to/e/4bg6mp2xhf0q'
+                    },
+                    {
+                        number: 3,
+                        title: 'Isekai Meikyuu de Harem wo 3',
+                        duration: '24 min',
+                        description: 'Episodio 3 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP3',
+                        videoUrl: 'https://streamwish.to/e/48297sk9xcyy'
+                    },
+                    {
+                        number: 4,
+                        title: 'Isekai Meikyuu de Harem wo 4',
+                        duration: '24 min',
+                        description: 'Episodio 4 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP4',
+                        videoUrl: 'https://streamwish.to/e/dv868882sbr1'
+                    },
+                    {
+                        number: 5,
+                        title: 'Isekai Meikyuu de Harem wo 5',
+                        duration: '24 min',
+                        description: 'Episodio 5 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP5',
+                        videoUrl: 'https://streamwish.to/e/szoasruxb3cc'
+                    },
+                    {
+                        number: 6,
+                        title: 'Isekai Meikyuu de Harem wo 6',
+                        duration: '24 min',
+                        description: 'Episodio 6 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP6',
+                        videoUrl: 'https://streamwish.to/e/53x5d3v76pha'
+                    },
+                    {
+                        number: 7,
+                        title: 'Isekai Meikyuu de Harem wo 7',
+                        duration: '24 min',
+                        description: 'Episodio 7 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP7',
+                        videoUrl: 'https://streamwish.to/e/ffb4iep0wmaa'
+                    },
+                    {
+                        number: 8,
+                        title: 'Isekai Meikyuu de Harem wo 8',
+                        duration: '24 min',
+                        description: 'Episodio 8 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP8',
+                        videoUrl: 'https://streamwish.to/e/8ak7h0wdrisr'
+                    },
+                    {
+                        number: 9,
+                        title: 'Isekai Meikyuu de Harem wo 9',
+                        duration: '24 min',
+                        description: 'Episodio 9 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP9',
+                        videoUrl: 'https://streamwish.to/e/sgtk72usj7fc'
+                    },
+                    {
+                        number: 10,
+                        title: 'Isekai Meikyuu de Harem wo 10',
+                        duration: '24 min',
+                        description: 'Episodio 10 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP10',
+                        videoUrl: 'https://streamwish.to/e/8rkygk8qd5sw'
+                    },
+                    {
+                        number: 11,
+                        title: 'Isekai Meikyuu de Harem wo 11',
+                        duration: '24 min',
+                        description: 'Episodio 11 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP11',
+                        videoUrl: 'https://streamwish.to/e/cwz9ezwxmnhq'
+                    },
+                    {
+                        number: 12,
+                        title: 'Isekai Meikyuu de Harem wo 12',
+                        duration: '24 min',
+                        description: 'Episodio 12 de Isekai Meikyuu de Harem wo',
+                        thumbnail: 'https://via.placeholder.com/150x85?text=EP12',
+                        videoUrl: 'https://streamwish.to/e/9qq0fjw0i0s9'
+                    }
+                ]
+            }
+        ]
+    },
 
                 {
                     id: 'ben10',
@@ -5575,7 +6766,8 @@ function updateContinueWatching() {
         ...contentDatabase.movies, 
         ...contentDatabase.series, 
         ...contentDatabase.anime, 
-        ...contentDatabase.animepeli
+        ...contentDatabase.animepeli,
+        ...contentDatabase.Deportes,
     ];
     
     grid.innerHTML = watchingList.map(watching => {
@@ -5778,6 +6970,7 @@ function initializeApp() {
     renderContent('seriesGrid', contentDatabase.series);
     renderContent('animeGrid', contentDatabase.anime);
     renderContent('animepeli', contentDatabase.animepeli);
+    renderContent('Deportes', contentDatabase.Deportes);
     updateContinueWatching();
     
     // Add navigation arrows after content is rendered
@@ -5830,7 +7023,8 @@ function search() {
         ...contentDatabase.movies, 
         ...contentDatabase.series, 
         ...contentDatabase.anime, 
-        ...contentDatabase.animepeli
+        ...contentDatabase.animepeli,
+        ...contentDatabase.Deportes, 
     ];
     
     const results = allContent.filter(item => 
@@ -6002,6 +7196,7 @@ function showSection(section) {
     const seriesSection = document.getElementById('seriesGrid').parentElement.parentElement;
     const animeSection = document.getElementById('animeGrid').parentElement.parentElement;
     const animepeliSection = document.getElementById('animepeli').parentElement.parentElement;
+    const DeportesSection = document.getElementById('Deportes').parentElement.parentElement;
     
     if (section === 'movies') {
         moviesSection.style.display = 'block';
@@ -6023,7 +7218,7 @@ function showSection(section) {
 
 // NAVIGATION ARROWS FUNCTIONALITY
 function addNavigationArrows() {
-    const sections = ['moviesGrid', 'seriesGrid', 'animeGrid', 'animepeli', 'continueWatchingGrid'];
+    const sections = ['moviesGrid', 'seriesGrid', 'animeGrid', 'animepeli', 'continueWatchingGrid','Deportes'];
     
     sections.forEach(gridId => {
         const grid = document.getElementById(gridId);
